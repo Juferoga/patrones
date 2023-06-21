@@ -10,7 +10,7 @@ export const environment = {
     {'name':'Juan Felipe Rodríguez','code':'20181020158','url':'https://github.com/juferoga'},
   ],
   materia: 'FIS',
-  proyecto: 'Cine Distrito',
+  proyecto: 'Cine Pacho',
   profesor: 'Santiago Salazar',
   api: 'http://localhost:8000/',
   api_factura: 'http://localhost:8000/',
