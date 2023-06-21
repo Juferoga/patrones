@@ -49,6 +49,6 @@ Thumbs.db
 .angular
 
 __pycache__/
-/backend/fisproject/fisproject/__pycache__
+/backend/dasp-project/dasp-project/__pycache__
 venv/
 vnev

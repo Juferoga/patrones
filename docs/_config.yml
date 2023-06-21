@@ -1,16 +1,16 @@
 # Configurations
-title:            FIS - UD
-longtitle:        Fundamentos de ingeniería de software - UD
+title:            DASP - UD
+longtitle:        Diseño Arquitectural de Software y patrones - UD
 author:           Juan Felipe Rodríguez
 email:            juferoga@github.com
 description: >
-  Fundamentos de ingeniería de software - UD.
+  Diseño Arquitectural de Software y patrones - UD.
 
 version:          1.0
 gitbook_version:  3.2.3
 
 url:              'https://juferoga.github.io'
-baseurl:          '/fis'
+baseurl:          '/patrones'
 rss:              RSS
 
 # bootstrap: use the remote theme for the site itself

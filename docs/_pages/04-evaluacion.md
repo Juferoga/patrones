@@ -59,7 +59,7 @@ De acuerdo con los escenarios y aspectos mencionados previamente, se proponen la
 
 #### Pruebas específicas
 ##### Pruebas Unitarias:
-- Cuando un comprador obtiene 100 puntos, Cine Distrito le regala una boleta en general para ver la película que el usuario elija.
+- Cuando un comprador obtiene 100 puntos, Cine Pacho le regala una boleta en general para ver la película que el usuario elija.
 - La boleta de regalo se vence al paso de 6 meses desde su entrega.
 ##### Pruebas de Integración:
 - Por cada compra de boletas se obtienen 10 puntos.
