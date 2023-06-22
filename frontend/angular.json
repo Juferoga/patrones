@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "fis-project": {
+    "dasp-project": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/fis-project",
+            "outputPath": "dist/dasp-project",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -76,10 +76,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "fis-project:build:production"
+              "browserTarget": "dasp-project:build:production"
             },
             "development": {
-              "browserTarget": "fis-project:build:development"
+              "browserTarget": "dasp-project:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -87,7 +87,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "fis-project:build"
+            "browserTarget": "dasp-project:build"
           }
         },
         "test": {

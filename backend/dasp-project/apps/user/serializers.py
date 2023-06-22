@@ -10,8 +10,8 @@ class UserSerializer(serializers.ModelSerializer):
       username=validated_data['email'],
       first_name=validated_data['first_name'],
       last_name=validated_data['last_name'],
-      role=validated_data['role'],
-      phone=validated_data['phone'],
+      role=validated_data['t_role'],
+      phone=validated_data['n_phone'],
       password=validated_data['password'],
       is_active=True,
 
@@ -23,7 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = get_user_model()
-    fields = ['pk', 'email', 'first_name', 'last_name', 'role', 'get_role_display', 'is_active']
+    fields = ['pk', 'email', 'first_name', 'last_name', 't_role', 'get_role_display', 'is_active']
     read_only_fields = ['pk', ]
 
 

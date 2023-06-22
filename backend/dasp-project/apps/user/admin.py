@@ -5,12 +5,12 @@ from django.contrib.auth import get_user_model
 @admin.register(get_user_model())
 class UserAdmin(admin.ModelAdmin):
   readonly_fields = ("email", "username")
-  list_display = ("username", "role", "phone", "is_superuser", "is_staff")
+  list_display = ("username", "t_role", "n_phone", "is_superuser", "is_staff")
   fieldsets = (
     (
       "Información básica", 
       {
-        "fields": ("username","email","phone","role","password")
+        "fields": ("username","email","n_phone","t_role","password")
       }
     ),(
       "Información específica",
@@ -22,7 +22,7 @@ class UserAdmin(admin.ModelAdmin):
       }
     )
   )
-  list_filter = ("is_superuser", "role")
+  list_filter = ("is_superuser", "t_role")
   search_fields = [
     "username",
     "first_name",

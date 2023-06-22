@@ -52,11 +52,7 @@ PROJECT_APPS = [
   'apps.api',
   'apps.movies',
   'apps.show',
-  'apps.snacks',
-  'apps.ticket',
   'apps.user',
-  'apps.unity',
-  'apps.type',
   'shared'
 ]
 

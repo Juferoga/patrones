@@ -11,18 +11,18 @@ from shared.permissions import IsAdminOrOwner, IsAdmin, IsReviewer
 
 ## EJEMPLO
 class UserListAPIView(generics.ListCreateAPIView):
-  queryset = get_user_model().objects.all().exclude(role=data.ADMINISTRATOR)
+  queryset = get_user_model().objects.all().exclude(t_role=data.ADMINISTRATOR)
   serializer_class = UserSerializer
   permission_classes = [ IsAdmin]
 
 
 class SellerListAPIView(generics.ListAPIView):
-  queryset = get_user_model().objects.filter(role=data.SELLER)
+  queryset = get_user_model().objects.filter(t_role=data.SELLER)
   serializer_class = UserSerializer
   permission_classes = [ IsAdmin | IsReviewer]
 
 class ClientListAPIView(generics.ListAPIView):
-  queryset = get_user_model().objects.filter(role=data.CLIENT)
+  queryset = get_user_model().objects.filter(t_role=data.CLIENT)
   serializer_class = UserSerializer
   permission_classes = [ IsAdmin | IsReviewer]
 

@@ -3,11 +3,12 @@ from .data import *
 from .managers import *
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-from apps.unity.models import Unity
 
 class User(AbstractUser):
-  phone = models.DecimalField(max_digits=20,decimal_places=0,null=True)
-  role = models.TextField(choices=ROLES, verbose_name="rol", null=True)
+  n_phone = models.DecimalField(max_digits=20,decimal_places=0,null=True)
+  t_role = models.TextField(choices=ROLES, verbose_name="rol", null=True)
+  n_cc = models.IntegerField(default=0, verbose_name="Número de documento")
+  t_cc = models.TextField(choices=ID_TYPES, verbose_name="Tipo de identificación")
 
   objects = UserManager()
 
@@ -58,9 +59,4 @@ class Employee (User):
     User, 
     on_delete=models.CASCADE,
     related_name="employees"
-  )
-  fk_unity = models.ForeignKey(
-    Unity, 
-    on_delete=models.CASCADE,
-    null=True
   )
