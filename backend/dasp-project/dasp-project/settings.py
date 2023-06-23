@@ -53,6 +53,10 @@ PROJECT_APPS = [
   'apps.movies',
   'apps.show',
   'apps.user',
+  'apps.product',
+  'apps.cinema',
+  'apps.theater',
+  'apps.seat',
   'shared'
 ]
 

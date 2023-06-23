@@ -1,8 +1,9 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.db import models
 from .data import *
 from .managers import *
-from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
+from apps.cinema.models import Cinema
 
 class User(AbstractUser):
   n_phone = models.DecimalField(max_digits=20,decimal_places=0,null=True)
@@ -59,4 +60,9 @@ class Employee (User):
     User, 
     on_delete=models.CASCADE,
     related_name="employees"
+  )
+  fk_cinema = models.ForeignKey(
+    Cinema,
+    on_delete=models.CASCADE,
+    related_name="Employees"
   )
