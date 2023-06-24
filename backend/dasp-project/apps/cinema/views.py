@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from .models import Cinema
+from rest_framework import viewsets, permissions
+from .serializers import CinemaSerializer
 
-# Create your views here.
+class CinemaViewSet(viewsets.ModelViewSet):
+    queryset = Cinema.objects.all()
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = CinemaSerializer
