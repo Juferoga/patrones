@@ -1,4 +1,4 @@
-# FIS project
+# PATRONES project
 
 ## Creando mi entorno de desarrollo
 

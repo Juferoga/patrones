@@ -9,7 +9,7 @@ export const environment = {
     {'name':'Nicolas Farias','code':'20181020000','url':'https://github.com/juferoga'},
     {'name':'Juan Felipe Rodríguez','code':'20181020158','url':'https://github.com/juferoga'},
   ],
-  materia: 'FIS',
+  materia: 'PATRONES',
   proyecto: 'Cine Pacho',
   profesor: 'Santiago Salazar',
   api: 'http://localhost:8000/',

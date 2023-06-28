@@ -51,12 +51,12 @@ Sigue la [guía de github][8] para más información.
  - [Brayan Stiven Yate P. 20192020151][10]
 
  [1]:https://gitlab.com/Juferoga
- [2]:https://github.com/Juferoga/fis/blob/main/LICENSE
+ [2]:https://github.com/Juferoga/patrones/blob/main/LICENSE
  [3]:https://angular.io/
  [4]:https://www.djangoproject.com/
  [5]:https://github.com/Juferoga/fis
  [6]:https://www.docker.com/
- [7]:https://github.com/Juferoga/fis/frontend/
+ [7]:https://github.com/Juferoga/patrones/frontend/
  [8]:https://docs.github.com/es/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll
  [9]:https://gitlab.com/felimarod
  [10]:https://gitlab.com/BrayanYate

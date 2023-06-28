@@ -80,7 +80,7 @@ De acuerdo con los escenarios y aspectos mencionados previamente, se proponen la
 
 Para este apartado realizaremos el uso de las pruebas ACID, para probar nuestra base de datos teniendo en cuenta:
 
-[Escenario de pruebas](https://raw.githubusercontent.com/Juferoga/fis/main/docs/assets/Ecenario_de_pruebas.pdf)
+[Escenario de pruebas](https://raw.githubusercontent.com/Juferoga/patrones/main/docs/assets/Ecenario_de_pruebas.pdf)
 
 ## Ensamblado del sistema
 ---
@@ -119,9 +119,9 @@ $ ```docker-compose up -d # el menos d es para ejecutarlo como demonio```
 
 ### BACKEND
 
-### FIS Backend
+### PATRONES Backend
 
-En este repositorio se encuentra el desarrollo de la sección que maneja el backend del aplicativo para la empresa FIS, el cual se desarrollo haciendo uso de la tecnología de docker, django y xhtml2pdf.
+En este repositorio se encuentra el desarrollo de la sección que maneja el backend del aplicativo para la empresa PATRONES, el cual se desarrollo haciendo uso de la tecnología de docker, django y xhtml2pdf.
 <hr>
 
 ### Instrucciones para utilizar el backend

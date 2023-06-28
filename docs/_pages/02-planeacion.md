@@ -218,7 +218,7 @@ Una de las etapas fundamentales y más importante para el desarrollo de software
 </div>
 
 Para visualizar el diagrama de la mejor manera ingresa el siguiente [enlace.][1]
-![Diagrama de Gantt](/fis/assets/images/pages/planeacion/DiagramaDeGantt.png "Diagrama de Gantt")
+![Diagrama de Gantt](/patrones/assets/images/pages/planeacion/DiagramaDeGantt.png "Diagrama de Gantt")
 
 ## Diagramas del proyecto
 
@@ -230,42 +230,42 @@ En la siguiente sección podrás ver los diagramas necesarios para el desarrollo
 
 ---
 
-![Diagrama de clases](/fis/assets/images/pages/planeacion/DiagramaClases.svg "Diagrama de clases")
+![Diagrama de clases](/patrones/assets/images/pages/planeacion/DiagramaClases.svg "Diagrama de clases")
 
 ### Diagrama de secuencia
 
 ---
 
-![Diagrama de secuencia](/fis/assets/images/pages/planeacion/DiagramaSecuencias.svg "Diagrama de secuencia")
+![Diagrama de secuencia](/patrones/assets/images/pages/planeacion/DiagramaSecuencias.svg "Diagrama de secuencia")
 
 ### Diagrama de tiempos
 
 ---
 
-![Diagrama de tiempos](/fis/assets/images/pages/planeacion/DiagramaTiempos.jpg "Diagrama de tiempos")
+![Diagrama de tiempos](/patrones/assets/images/pages/planeacion/DiagramaTiempos.jpg "Diagrama de tiempos")
 
 ### Diagrama de estados
 
 ---
 
-![Diagrama de estados](/fis/assets/images/pages/planeacion/DiagramaEstados.svg "Diagrama de estados")
+![Diagrama de estados](/patrones/assets/images/pages/planeacion/DiagramaEstados.svg "Diagrama de estados")
 
 ### Diagrama de paquetes
 
 ---
 
-![Diagrama de paquetes](/fis/assets/images/pages/planeacion/DiagramaPaquetes.svg "Diagrama de paquetes")
+![Diagrama de paquetes](/patrones/assets/images/pages/planeacion/DiagramaPaquetes.svg "Diagrama de paquetes")
 
 ### Diagrama entidad relación
 
 ---
 
-![Diagrama entidad relación](/fis/assets/images/pages/planeacion/DiagramaER.svg "Diagrama entidad relación")
+![Diagrama entidad relación](/patrones/assets/images/pages/planeacion/DiagramaER.svg "Diagrama entidad relación")
 
 ### Diagrama relacional
 ---
 
-  ![Diagrama relacional](/fis/assets/images/pages/planeacion/DiagramaRelacional.svg "Diagrama relacional")
+  ![Diagrama relacional](/patrones/assets/images/pages/planeacion/DiagramaRelacional.svg "Diagrama relacional")
 
 <!--
 ### Diccionario de datos

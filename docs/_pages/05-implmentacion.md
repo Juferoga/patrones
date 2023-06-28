@@ -9,7 +9,7 @@ layout: post
 ## Arquitectura
 --- 
 
-![Infraestructura del proyecto con aws](/fis/assets/images/pages/implementacion/infra_fis.svg "Infraestructura del proyecto con aws")
+![Infraestructura del proyecto con aws](/patrones/assets/images/pages/implementacion/infra_fis.svg "Infraestructura del proyecto con aws")
 
 ### Costos de la arquitectura
 <div class="table-wrapper" markdown="block">
@@ -25,7 +25,7 @@ layout: post
 
 </div>
 
-![Precios infraestructura del proyecto con aws](/fis/assets/images/pages/implementacion/infra_fis_prices.png "Precios infraestructura del proyecto con aws")
+![Precios infraestructura del proyecto con aws](/patrones/assets/images/pages/implementacion/infra_fis_prices.png "Precios infraestructura del proyecto con aws")
 
 [Tool for diagram for cloud implementation.][1]
 
