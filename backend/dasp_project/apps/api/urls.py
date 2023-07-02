@@ -8,4 +8,5 @@ urlpatterns = [
   path('function/', include('apps.function.urls')),
   path('theater/', include('apps.theater.urls')),
   path('cinema/', include('apps.cinema.urls')),
+  path('seat/', include('apps.seat.urls')),
 ]

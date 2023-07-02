@@ -51,6 +51,7 @@ PROJECT_APPS = [
     'apps.function',
     'apps.theater',
     'apps.cinema',
+    'apps.seat',
 ]
 
 INSTALLED_APPS = SYSTEM_APPS + LIBRARY_APPS + PROJECT_APPS

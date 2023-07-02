@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from .models import Seat
+from rest_framework import viewsets, permissions
+from .serializers import SeatSerializer
 
-# Create your views here.
+class SeatViewSet(viewsets.ModelViewSet):
+    queryset = Seat.objects.all()
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = SeatSerializer
