@@ -9,34 +9,65 @@ import { MessageService } from 'primeng/api';
             <p-card>
                 <ng-template pTemplate="title"> Asientos  </ng-template>
                 <ng-template pTemplate="subtitle"> Elige los asientos </ng-template>
-                <ng-template pTemplate="content"> <!-- Aca va la vista -->
-                <p-table [value]="productList" dataKey="code" [tableStyle]="{'min-width': '50rem'}">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th style="width: 4rem">
-                                No.
-                            </th>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Precio</th>
-                            <th>Cantidad</th>
-                            <th>Categoría</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-product let-a>
-                        <tr>
-                            <td><pre>{{a.id}}</pre></td>
-                            <td>{{product.nombre}}</td>
-                            <td>{{product.descripcion}}</td>
-                            <td>{{product.precio}}</td>
-                            <td>{{product.cantidad}}</td>
-                            <td style="display: flex; justify-content: space-evenly;">
-                                <p-button (click)="agregarCarrito(a.id,product)" icon="pi pi-plus" styleClass="p-button-rounded"></p-button>
-                                <p-button (click)="eliminarCarrito(a.id)" icon="pi pi-minus" styleClass="p-button-rounded"></p-button>
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
+                <ng-template pTemplate="content"> 
+                    <!-- Aca va la vista -->
+                    <div class="multiplex">
+                        <div class="theatre">
+                            <!-- TODO: Functionality -->
+                            <div class="multiplex">
+                                <div class="theatre">
+                                    <div class="cinema-seats left">
+                                        <div *ngFor="let row of seats; index as rowIndex" class="cinema-row row-{{rowIndex+1}}">
+                                            <div *ngFor="let seat of row; index as seatIndex" 
+                                                class="seat" 
+                                                [class.active]="seat.selected" 
+                                                (click)="toggleSeat(rowIndex, seatIndex)">
+                                            {{seatIndex+1}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cinema-seats right">
+                                        <div *ngFor="let row of seats; index as rowIndex" class="cinema-row row-{{rowIndex+1}}">
+                                            <div *ngFor="let seat of row; index as seatIndex" 
+                                                class="seat" 
+                                                [class.active]="seat.selected" 
+                                                (click)="toggleSeat(rowIndex, seatIndex)">
+                                            {{seatIndex+1}}
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <p-table [value]="productList" dataKey="code" [tableStyle]="{'min-width': '50rem'}">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width: 4rem">
+                                    No.
+                                </th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Categoría</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-product let-a>
+                            <tr>
+                                <td><pre>{{a.id}}</pre></td>
+                                <td>{{product.nombre}}</td>
+                                <td>{{product.descripcion}}</td>
+                                <td>{{product.precio}}</td>
+                                <td>{{product.cantidad}}</td>
+                                <td style="display: flex; justify-content: space-evenly;">
+                                    <p-button (click)="agregarCarrito(a.id,product)" icon="pi pi-plus" styleClass="p-button-rounded"></p-button>
+                                    <p-button (click)="eliminarCarrito(a.id)" icon="pi pi-minus" styleClass="p-button-rounded"></p-button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
                 </ng-template>
                 <ng-template pTemplate="footer">
                     <div class="grid grid-nogutter justify-content-between">
@@ -46,7 +77,8 @@ import { MessageService } from 'primeng/api';
                 </ng-template>
             </p-card>
         </div>
-        `
+        `,
+    styleUrls: ["./seat.scss"]
 })
 export class SeatDemo implements OnInit {
     constructor(
@@ -58,6 +90,15 @@ export class SeatDemo implements OnInit {
     products: any;
     productList : any[];
     productListCarrito : any[];
+    rows = [1,2,3,4,5,6,7];
+    seatsPerRow = [1,2,3,4,5,6,7];
+    
+    // Generamos la matriz de asientos
+    seats = this.rows.map(row => 
+        this.seatsPerRow.map(seat => 
+            ({ number: seat, selected: false })
+        )
+    );
 
     ngOnInit() {
         this.products = this.ticketService.ticketInformation.products;
@@ -105,4 +146,11 @@ export class SeatDemo implements OnInit {
     eliminarCarrito(id){
 
     }
+
+     // Método para manejar el click sobre un asiento
+  toggleSeat(rowIndex: number, seatIndex: number) {
+    let newRow = [...this.seats[rowIndex]];
+    newRow[seatIndex].selected = !newRow[seatIndex].selected;
+    this.seats[rowIndex] = newRow;
+  }
 }

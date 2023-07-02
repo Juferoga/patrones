@@ -19,13 +19,13 @@ export class MovieService {
 
   getMovies():Observable<Movies[]> {
     return this.http.get<Movies[]>(
-      environment.api+"movies/",
+      environment.api+"movie/",
       {headers: this.headers}
     )
   }
   getMovie(id:number):Observable<Movies[]>{
     return this.http.get<Movies[]>(
-      environment.api + 'movies/'+id +"/",
+      environment.api + 'movie/'+id +"/",
       {headers: this.headers}
     )
   }

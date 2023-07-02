@@ -35,6 +35,10 @@ a:hover{
   background-color: rgb(245, 245, 230);
 }
 
+.container-active{
+  background-color: rgb(243, 243, 204);
+}
+
 .container div,a>button{
   margin-right: 10px;
 }
@@ -58,5 +62,5 @@ a:hover{
 
 .container div:first-child p{
   font-family: 'Courier New', Courier, monospace;
-  color: rgb(104, 104, 104);
+  color: rgb(105, 95, 95);
 }
