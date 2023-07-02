@@ -25,8 +25,9 @@ SECRET_KEY = 'django-insecure-s&zw^-6i(snxq%26amhs=kkfblob4z#8i+=k=qvvxargqmrkpc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    '*'
+]
 
 # Application definition
 
@@ -41,6 +42,8 @@ SYSTEM_APPS = [
 
 LIBRARY_APPS = [
     'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 PROJECT_APPS = [
@@ -64,6 +67,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'dasp_project.urls'
@@ -146,3 +151,19 @@ STATICFILES_DIRS = [
 ]
 
 AUTH_USER_MODEL = "authuser.User"
+
+### REST FRAMEWORK AUTHENTICATION
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
+### CORS FOR ANGULAR
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+]

@@ -1,4 +1,5 @@
 from django.urls import path, include
+from apps.authuser import views
 
 urlpatterns = [
   path('user/', include('apps.authuser.urls')),
@@ -9,4 +10,5 @@ urlpatterns = [
   path('theater/', include('apps.theater.urls')),
   path('cinema/', include('apps.cinema.urls')),
   path('seat/', include('apps.seat.urls')),
+  path('auth/generate_token/',views.CustomAuthToken.as_view())
 ]

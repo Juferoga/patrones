@@ -4,15 +4,13 @@ export const environment = {
   repositorio: 'https://github.com/juferoga/patrones',
   juferoga: 'https://github.com/juferoga/',
   integrantes: [
-    {'name':'Felipe Martin','code':'2018102000','url':'https://github.com/juferoga'},
     {'name':'Brayan Yate','code':'20171020000','url':'https://github.com/juferoga'},
-    {'name':'Nicolas Farias','code':'20181020000','url':'https://github.com/juferoga'},
-    {'name':'Juan Felipe Rodríguez','code':'20181020158','url':'https://github.com/juferoga'},
+    {'name':'Juan Felipe Rodríguez','code':'20181020158','url':'https://github.com/juferoga'}
   ],
   materia: 'PATRONES',
-  proyecto: 'Cine Pacho',
-  profesor: 'Santiago Salazar',
-  api: 'http://localhost:8000/',
+  proyecto: 'proyecto',
+  profesor: 'Helio Ramirez',
+  api: 'http://localhost:8000/api/',
   api_factura: 'http://localhost:8000/',
   server: 'http://localhost:8000/',
 };
