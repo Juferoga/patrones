@@ -3,6 +3,7 @@ from django.contrib.auth.models import UserManager, AbstractBaseUser, Permission
 from django.db import models
 from django.utils import timezone
 from .choices import RoleChoices, TypeIdentificationChoices
+from apps.cinema.models import Cinema
 
 class CustomUserManager(UserManager):
 
@@ -110,6 +111,7 @@ class Employee(User):
   d_start_contract = models.DateTimeField(blank=True,default=timezone.now)
   d_end_contract = models.DateTimeField(blank=True,null=True)
   t_rol = models.IntegerField(default=RoleChoices.EMPLOYEE, choices=RoleChoices.choices)
+  fk_cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, null=True)
 
   objects = CustomUserManager()
 

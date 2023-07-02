@@ -1,7 +1,7 @@
 export const environment = {
-  docs:'https://juferoga.github.io/fis',
+  docs:'https://juferoga.github.io/patrones',
   cronograma: 'https://github.com/users/Juferoga/projects/2/views/3',
-  repositorio: 'https://github.com/juferoga/fis',
+  repositorio: 'https://github.com/juferoga/patrones',
   juferoga: 'https://github.com/juferoga/',
   integrantes: [
     {'name':'Felipe Martin','code':'2018102000','url':'https://github.com/juferoga'},
