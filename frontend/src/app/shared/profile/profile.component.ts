@@ -9,7 +9,6 @@ import { UserService } from "src/app/core/services/users/user.service";
   styleUrls: ["./profile.component.scss"],
 })
 export class ProfileComponent {
-  // TODO: Integrate -> https://primeng.org/tree/horizontal
 
   userLoading = {
     nombre: "",
@@ -23,8 +22,8 @@ export class ProfileComponent {
 
   };
 
-  username = sessionStorage.getItem("username")
-    ? sessionStorage.getItem("username")
+  username = localStorage.getItem("username")
+    ? localStorage.getItem("username")
     : "Loading...";
   representantes: any[];
   user: User = this.userLoading;
