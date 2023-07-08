@@ -8,62 +8,54 @@ layout: post
 
 Una de las etapas fundamentales y más importante para el desarrollo de software. Es la etapa en la que se definen los objetivos, alcances, recursos y tiempos del proyecto. En esta fase se identifican los requisitos del sistema, se establecen los objetivos de calidad y se determinan los recursos necesarios para cumplirlos. La planificación también incluye la definición de un calendario de desarrollo, un presupuesto y un plan de gestión de riesgos. El objetivo de la fase de planificación es establecer una base sólida para el desarrollo del software, lo que permite al equipo de desarrollo trabajar de manera eficiente y asegurar que el proyecto se complete a tiempo y dentro del presupuesto.
 
-<!-- ## Presupuesto
+## Presupuesto
 
-## Lista de riesgos, planes de mitigación y contingencia
-
----
-
-### Identificación de riesgos
-
----
-
-#### Riesgos generales (del proceso)
+### Riesgos generales (del proceso)
 
 ---
 
 - Reducción o extensión del tiempo empleado para el desarrollo de proyecto debido a factores externos no contemplados.
 
-#### Riesgos del producto
+### Riesgos del producto
 
 ---
 
 - Mal funcionamiento de las herramientas de desarrollo.
 
 <table>
-<thead>
-  <tr>
-    <th colspan="3">Plan de Mitigación y Contingencia</th>
-    <th>Versión: 1.0.0<br>Fecha: 14/09/2022</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td><strong>Tipo</strong></td>
-    <td><strong>Riesgo</strong></td>
-    <td><strong>Medida preventiva (Mitigación)</strong></td>
-    <td><strong>Acción correctiva (Contingencia)</strong></td>
-  </tr>
-  <tr>
-    <td>Riesgo del producto</td>
-    <td>Desconocimiento de las tecnologías utilizadas en el proyecto</td>
-    <td>Capacitar a los integrantes del grupo</td>
-    <td>Asignar módulos más complejos a los integrantes con más experiencia</td>
-  </tr>
-  <tr>
-    <td>Riesgo del producto</td>
-    <td>Desconocimiento de las tecnologías utilizadas en el proyecto</td>
-    <td>Capacitar a los integrantes del grupo</td>
-    <td>Asignar módulos más complejos a los integrantes con más experiencia</td>
-  </tr>
-  <tr>
-    <td>Riesgo del producto</td>
-    <td>Desconocimiento de las tecnologías utilizadas en el proyecto</td>
-    <td>Capacitar a los integrantes del grupo</td>
-    <td>Asignar módulos más complejos a los integrantes con más experiencia</td>
-  </tr>
-</tbody>
-</table> -->
+  <thead>
+    <tr>
+      <th colspan="3">Plan de Mitigación y Contingencia</th>
+      <th>Versión: 1.0.0<br>Fecha: 14/09/2022</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Tipo</strong></td>
+      <td><strong>Riesgo</strong></td>
+      <td><strong>Medida preventiva (Mitigación)</strong></td>
+      <td><strong>Acción correctiva (Contingencia)</strong></td>
+    </tr>
+    <tr>
+      <td>Riesgo del producto</td>
+      <td>Desconocimiento de las tecnologías utilizadas en el proyecto</td>
+      <td>Capacitar a los integrantes del grupo</td>
+      <td>Asignar módulos más complejos a los integrantes con más experiencia</td>
+    </tr>
+    <tr>
+      <td>Riesgo del producto</td>
+      <td>Desconocimiento de las tecnologías utilizadas en el proyecto</td>
+      <td>Capacitar a los integrantes del grupo</td>
+      <td>Asignar módulos más complejos a los integrantes con más experiencia</td>
+    </tr>
+    <tr>
+      <td>Riesgo del producto</td>
+      <td>Desconocimiento de las tecnologías utilizadas en el proyecto</td>
+      <td>Capacitar a los integrantes del grupo</td>
+      <td>Asignar módulos más complejos a los integrantes con más experiencia</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Cronograma de desarrollo
 
@@ -226,35 +218,30 @@ Para visualizar el diagrama de la mejor manera ingresa el siguiente [enlace.][1]
 
 En la siguiente sección podrás ver los diagramas necesarios para el desarrollo del proyecto.
 
-### Diagrama de clases
+### Diagrama de contexto
 
 ---
 
-![Diagrama de clases](/patrones/assets/images/pages/planeacion/DiagramaClases.svg "Diagrama de clases")
+![Diagrama de contexto](/patrones/assets/images/pages/planeacion/DiagramaContexto.svg "Diagrama de Contexto")
 
-### Diagrama de secuencia
-
----
-
-![Diagrama de secuencia](/patrones/assets/images/pages/planeacion/DiagramaSecuencias.svg "Diagrama de secuencia")
-
-### Diagrama de tiempos
+### Diagrama de Gantt
 
 ---
 
-![Diagrama de tiempos](/patrones/assets/images/pages/planeacion/DiagramaTiempos.jpg "Diagrama de tiempos")
+  ![Diagrama de Gantt](/patrones/assets/images/pages/planeacion/DiagramaDeGantt.png "Diagrama de Gantt")
+  Para visualizar el diagrama de la mejor manera ingresa el siguiente [enlace.][1]
 
-### Diagrama de estados
-
----
-
-![Diagrama de estados](/patrones/assets/images/pages/planeacion/DiagramaEstados.svg "Diagrama de estados")
-
-### Diagrama de paquetes
+### Diagrama de Casos de uso
 
 ---
 
-![Diagrama de paquetes](/patrones/assets/images/pages/planeacion/DiagramaPaquetes.svg "Diagrama de paquetes")
+![Diagrama de casos de uso](/patrones/assets/images/pages/planeacion/DiagramaCU.svg "Diagrama de casos de uso")
+
+### Diagrama de arquitectura
+
+---
+
+![Diagrama de arquitectura](/patrones/assets/images/pages/planeacion/DiagramaArquitectura.svg "Diagrama de arquitectura")
 
 ### Diagrama entidad relación
 
@@ -263,15 +250,27 @@ En la siguiente sección podrás ver los diagramas necesarios para el desarrollo
 ![Diagrama entidad relación](/patrones/assets/images/pages/planeacion/DiagramaER.svg "Diagrama entidad relación")
 
 ### Diagrama relacional
+
 ---
 
   ![Diagrama relacional](/patrones/assets/images/pages/planeacion/DiagramaRelacional.svg "Diagrama relacional")
 
-<!--
-### Diccionario de datos
+### Diagrama de despliegue
+
 ---
 
-  TODO: DICCIONARIO DE DATOS
--->
+  ![Diagrama de despliegue](/patrones/assets/images/pages/planeacion/DiagramaDespliegue.svg "Diagrama de despliegue")
 
-[1]: https://github.com/users/Juferoga/projects/2/views/3
+### Diagrama paquetes
+
+---
+
+### Diagrama de paquetes Front
+
+  ![Diagrama de paquetes Front](/patrones/assets/images/pages/planeacion/DiagramaPaquetesFront.svg "Diagrama de paquetes Front")
+
+### Diagrama de paquetes Back
+
+  ![Diagrama de paquetes Back](/patrones/assets/images/pages/planeacion/DiagramaPaquetesBack.svg "Diagrama de paquetes Back")
+
+[1]: https://github.com/users/Juferoga/projects/5/views/3
