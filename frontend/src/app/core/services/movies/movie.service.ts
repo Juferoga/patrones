@@ -23,8 +23,8 @@ export class MovieService {
       {headers: this.headers}
     )
   }
-  getMovie(id:number):Observable<Movies[]>{
-    return this.http.get<Movies[]>(
+  getMovie(id:number):Observable<Movies>{
+    return this.http.get<Movies>(
       environment.api + 'movie/'+id +"/",
       {headers: this.headers}
     )

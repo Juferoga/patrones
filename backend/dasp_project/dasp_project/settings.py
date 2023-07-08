@@ -26,6 +26,9 @@ SECRET_KEY = 'django-insecure-s&zw^-6i(snxq%26amhs=kkfblob4z#8i+=k=qvvxargqmrkpc
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "http://localhost:4200",
+    "https://patrones.juferoga.live",
+    "https://back.juferoga.live",
     '*'
 ]
 
