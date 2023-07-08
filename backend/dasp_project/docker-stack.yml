@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  django:
+    image: patrones-back:1.0
+    networks:
+      - proxy
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      placement:
+        constraints: [node.hostname==juferoga.live]    
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=proxy"
+        - "traefik.http.routers.back-patrones.rule=host(`patrones.juferoga.live`)"
+        - "traefik.http.routers.back-patrones.entrypoints=websecure"
+        - "traefik.http.routers.back-patrones.service=back-patrones"
+        - "traefik.http.services.back-patrones.loadbalancer.port=80"
+        - "traefik.port=80"
+networks:
+    proxy:
+      external: true

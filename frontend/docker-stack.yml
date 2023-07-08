@@ -16,10 +16,10 @@ services:
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=proxy"
-        - "traefik.http.routers.front-db.rule=host(`bd.juferoga.tk`)"
-        - "traefik.http.routers.front-db.entrypoints=websecure"
-        - "traefik.http.routers.front-db.service=front-db"
-        - "traefik.http.services.front-db.loadbalancer.port=80"
+        - "traefik.http.routers.front-patrones.rule=host(`patrones.juferoga.live`)"
+        - "traefik.http.routers.front-patrones.entrypoints=websecure"
+        - "traefik.http.routers.front-patrones.service=front-patrones"
+        - "traefik.http.services.front-patrones.loadbalancer.port=80"
         - "traefik.port=80"
 networks:
     proxy:
