@@ -10,8 +10,8 @@ permalink: /
 
 [![Juan Felipe Rodriguez Galindo](https://img.shields.io/badge/Juferoga-github-br?style=flat-square)][1]
 [![Brayan Stiven Yate](https://img.shields.io/badge/BrayanYate-github-br?style=flat-square)][10]
-[![Jonathan Estiven Castellanos](https://img.shields.io/badge/BrayanYate-github-br?style=flat-square)][10]
-[![Mateo Bohorquez R.](https://img.shields.io/badge/BrayanYate-github-br?style=flat-square)][10]
+[![Jonathan Estiven Castellanos](https://img.shields.io/badge/JonathanCastellanos-github-br?style=flat-square)][10]
+[![Mateo Bohorquez R.](https://img.shields.io/badge/MateoBohorquez-github-br?style=flat-square)][10]
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)][2]
 
 Repositorio para almacenar las tareas, talleres, ejercicios, entre otros que se desarrollen a lo largo de la materia diseño arquitectural de software y patrones, proyecto CINE PACHO.
