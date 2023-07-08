@@ -15,8 +15,8 @@ Repositorio para almacenar las tareas, talleres, ejercicios, entre otros que se 
 1. Backend  → Desarrollo del backend del aplicativo, en este caso [Django][3].
 2. Docs  → Documentación del proyecto alojada en [github][5].
     - Dentro de los docs se almacenan las actas del desarrollo y los documentos importantes.
-4. ETC   → Cosas random a organizar.
 3. Frontend → Desarrollo del frontend del aplicativo, en este caso [Angular][4].
+4. ETC   → Cosas random a organizar.
 
 ## Fast SetUp
 
@@ -54,11 +54,12 @@ jekyll serve
 
 Sigue la [guía de github][8] para más información.
 
-## Contributors:
- - [Juan Felipe Rodríguez Galindo - Código 20181020158][1]
- - [Brayan Stiven Yate P. 20192020151][10]
- - [Jonathan Estiven Castellanos. 20191020003][10]
- - [Mateo Bohorquez. 20162021299][10]
+## Contributors
+
+- [Juan Felipe Rodríguez Galindo - Código 20181020158][1]
+- [Brayan Stiven Yate P. 20192020151][10]
+- [Jonathan Estiven Castellanos. 20191020003][10]
+- [Mateo Bohorquez. 20162021299][10]
 
  [1]:https://gitlab.com/Juferoga
  [2]:https://github.com/Juferoga/patrones/blob/main/LICENSE
@@ -68,6 +69,6 @@ Sigue la [guía de github][8] para más información.
  [6]:https://www.docker.com/
  [7]:https://github.com/Juferoga/patrones/frontend/
  [8]:https://docs.github.com/es/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll
- [9]:https://gitlab.com/felimarod
+ [9]:https://gitlab.com/juferoga
  [10]:https://gitlab.com/BrayanYate
- [11]:https://gitlab.com/nicofarii
+ [11]:https://gitlab.com/juferoga
