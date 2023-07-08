@@ -10,7 +10,7 @@ services:
         condition: on-failure
         delay: 5s
       placement:
-        constraints: [node.hostname==juferoga.live]    
+        constraints: [node.hostname==juferoga]    
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=proxy"
