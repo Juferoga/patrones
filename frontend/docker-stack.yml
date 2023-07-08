@@ -1,7 +1,9 @@
 version: '3.7'
 services:
-  bd_front:
+  patrones_front:
     image: patrones-front:1.0
+    ports:
+      - 80
     networks:
       - proxy
     deploy:
