@@ -2,8 +2,6 @@ version: '3.7'
 services:
   patrones_front:
     image: patrones-front:1.0
-    ports:
-      - 80
     networks:
       - proxy
     deploy:
@@ -12,15 +10,14 @@ services:
         condition: on-failure
         delay: 5s
       placement:
-        constraints: [node.hostname==juferoga]    
+        constraints: [node.hostname == juferoga]
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=proxy"
-        - "traefik.http.routers.front-patrones.rule=host(`patrones.juferoga.live`)"
-        - "traefik.http.routers.front-patrones.entrypoints=websecure"
-        - "traefik.http.routers.front-patrones.service=front-patrones"
-        - "traefik.http.services.front-patrones.loadbalancer.port=80"
-        - "traefik.port=80"
+        - "traefik.http.routers.front.entrypoints=websecure"
+        - "traefik.http.routers.front.rule=Host(`patrones.juferoga.live`)"
+        - "traefik.http.routers.front.service=front"
+        - "traefik.http.services.front.loadbalancer.server.port=80"
 networks:
     proxy:
       external: true
