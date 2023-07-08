@@ -4,8 +4,6 @@ services:
     image: patrones-front:1.0
     networks:
       - proxy
-    ports:
-      - 80:80
     deploy:
       replicas: 1
       restart_policy:

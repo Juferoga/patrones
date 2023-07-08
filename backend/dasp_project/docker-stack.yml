@@ -21,7 +21,7 @@ services:
         - "traefik.http.routers.back-patrones.rule=host(`patrones.juferoga.live`)"
         - "traefik.http.routers.back-patrones.entrypoints=websecure"
         - "traefik.http.routers.back-patrones.service=back-patrones"
-        - "traefik.http.services.back-patrones.loadbalancer.port=80"
+        - "traefik.http.services.back-patrones.loadbalancer.port=8000"
         - "traefik.port=80"
 networks:
     proxy:
