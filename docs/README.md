@@ -4,7 +4,7 @@ title: DASP - UD
 permalink: /
 ---
 
-# 👻  **DISEÑO ARQUITECTURAL DE SOFTWARE Y PATRONES**
+## 👻  **DISEÑO ARQUITECTURAL DE SOFTWARE Y PATRONES**
 
 <img src="https://www.udistrital.edu.co/themes/custom/versh/images/default/preloader.png" width="192px" height="192px" align="right"/>
 
@@ -16,7 +16,7 @@ permalink: /
 
 Repositorio para almacenar las tareas, talleres, ejercicios, entre otros que se desarrollen a lo largo de la materia diseño arquitectural de software y patrones, proyecto CINE PACHO.
 
-## Contenido
+### Contenido
 
 1. Backend  → Desarrollo del backend del aplicativo, en este caso [Django][3].
 2. Docs  → Documentación del proyecto alojada en [github][5].
@@ -24,9 +24,9 @@ Repositorio para almacenar las tareas, talleres, ejercicios, entre otros que se 
 3. Frontend → Desarrollo del frontend del aplicativo, en este caso [Angular][4].
 4. ETC   → Cosas random a organizar.
 
-## Fast SetUp
+### Fast SetUp
 
-### Backend
+#### Backend
 
 Primero debes tener instalado [docker][6], ejecuta el script para desplegar en local.
 
@@ -41,11 +41,11 @@ python3 -m venv venv
 source ./venv/bin/activate
 ```
 
-### Frontend
+#### Frontend
 
 Sigue la [guía][7]
 
-### Compilar los docs localmente
+#### Compilar los docs localmente
 
 Instala ruby, y dentro de la carpeta docs ejecuta.
 
@@ -61,21 +61,21 @@ jekyll serve
 
 Sigue la [guía de github][8] para más información.
 
-## Contributors
+### Contributors
 
 - [Juan Felipe Rodríguez Galindo - Código 20181020158][1]
-- [Brayan Stiven Yate P. 20192020151][10]
-- [Jonathan Estiven Castellanos. 20191020003][9]
-- [Mateo Bohorquez. 20162021299][11]
+- [Brayan Stiven Yate P. - Código 20192020151][10]
+- [Jonathan Estiven Castellanos. - Código 20191020003][9]
+- [Mateo Bohorquez. - Código 20162021299][11]
 
- [1]:https://gitlab.com/Juferoga
- [2]:https://github.com/Juferoga/patrones/blob/main/LICENSE
- [3]:https://angular.io/
- [4]:https://www.djangoproject.com/
- [5]:https://github.com/Juferoga/patrones
- [6]:https://www.docker.com/
- [7]:https://github.com/Juferoga/patrones/tree/main/frontend
- [8]:https://docs.github.com/es/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll
- [9]:https://gitlab.com/felimarod
- [10]:https://gitlab.com/BrayanYate
- [11]:https://gitlab.com/nicofarii
+[1]:https://gitlab.com/Juferoga
+[2]:https://github.com/Juferoga/patrones/blob/main/LICENSE
+[3]:https://angular.io/
+[4]:https://www.djangoproject.com/
+[5]:https://github.com/Juferoga/patrones
+[6]:https://www.docker.com/
+[7]:https://github.com/Juferoga/patrones/tree/main/frontend
+[8]:https://docs.github.com/es/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll
+[9]:https://gitlab.com/juferoga
+[10]:https://gitlab.com/BrayanYate
+[11]:https://gitlab.com/juferoga

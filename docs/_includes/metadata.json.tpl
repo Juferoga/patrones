@@ -37,7 +37,7 @@
             }
         },
         "theme": "default",
-        "author": "Tao He",
+        "author": "Juferoga",
         "pdf": {
             "pageNumbers": true,
             "fontSize": 12,

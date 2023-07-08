@@ -7,13 +7,14 @@ layout: post
 ---
 
 ## Arquitectura
---- 
+
+---
 
 ![Infraestructura del proyecto con aws](/patrones/assets/images/pages/implementacion/infra_fis.svg "Infraestructura del proyecto con aws")
 
 ### Costos de la arquitectura
-<div class="table-wrapper" markdown="block">
 
+<div class="table-wrapper" markdown="block">
 
   | category   | type | region    | count | unitPrice | cost  | instanceType | instanceSize | platform | role       | engine            | dataGb |
   |------------|------|-----------|-------|-----------|-------|--------------|--------------|----------|------------|-------------------|--------|
@@ -22,22 +23,22 @@ layout: post
   | storage    | s3   | us-east-1 | 1     | 3.95      | 3.95  |              |              |          |            |                   | 0.25   |
   | database   | rds  | us-east-1 | 1     | 43.8      | 43.8  | serverless   | serverless   |          | serverless | aurora-postgresql |        |
 
-
 </div>
 
 ![Precios infraestructura del proyecto con aws](/patrones/assets/images/pages/implementacion/infra_fis_prices.png "Precios infraestructura del proyecto con aws")
 
 [Tool for diagram for cloud implementation.][1]
 
-<!-- ## Instalación
---- 
+## Instalación
 
-Instalación del sistema.
+---
 
-## Soporte técnico post-instalación
+[Instalación del sistema.][2]
+
+<!-- ## Soporte técnico post-instalación
 --- 
 
 Errores post-instalación? obvio si 😆. -->
 
-
 [1]:https://www.cloudcraft.co/
+[2]:https://juferoga.github.io/patrones/pages/04-evaluacion/#ensamblado-del-sistema

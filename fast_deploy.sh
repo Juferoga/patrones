@@ -6,6 +6,6 @@ sh deploy.sh
 echo -e "FIN DESPLIEGUE FRONTEND"
 
 echo -e "DESPLEGANDO BACKEND"
-cd ../backend/dasp_project/
+cd ../backend/
 sh deploy.sh
 echo -e "FIN DESPLIEGUE BACKEND"

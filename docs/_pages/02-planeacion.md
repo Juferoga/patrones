@@ -22,40 +22,42 @@ Una de las etapas fundamentales y más importante para el desarrollo de software
 
 - Mal funcionamiento de las herramientas de desarrollo.
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3">Plan de Mitigación y Contingencia</th>
-      <th>Versión: 1.0.0<br>Fecha: 14/09/2022</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Tipo</strong></td>
-      <td><strong>Riesgo</strong></td>
-      <td><strong>Medida preventiva (Mitigación)</strong></td>
-      <td><strong>Acción correctiva (Contingencia)</strong></td>
-    </tr>
-    <tr>
-      <td>Riesgo del producto</td>
-      <td>Desconocimiento de las tecnologías utilizadas en el proyecto</td>
-      <td>Capacitar a los integrantes del grupo</td>
-      <td>Asignar módulos más complejos a los integrantes con más experiencia</td>
-    </tr>
-    <tr>
-      <td>Riesgo del producto</td>
-      <td>Desconocimiento de las tecnologías utilizadas en el proyecto</td>
-      <td>Capacitar a los integrantes del grupo</td>
-      <td>Asignar módulos más complejos a los integrantes con más experiencia</td>
-    </tr>
-    <tr>
-      <td>Riesgo del producto</td>
-      <td>Desconocimiento de las tecnologías utilizadas en el proyecto</td>
-      <td>Capacitar a los integrantes del grupo</td>
-      <td>Asignar módulos más complejos a los integrantes con más experiencia</td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-wrapper" markdown="block">
+  <table>
+    <thead>
+      <tr>
+        <th colspan="3">Plan de Mitigación y Contingencia</th>
+        <th>Versión: 1.0.0<br>Fecha: 07/07/2023</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tipo</strong></td>
+        <td><strong>Riesgo</strong></td>
+        <td><strong>Medida preventiva (Mitigación)</strong></td>
+        <td><strong>Acción correctiva (Contingencia)</strong></td>
+      </tr>
+      <tr>
+        <td>Riesgo del producto</td>
+        <td>Desconocimiento de las tecnologías utilizadas en el proyecto</td>
+        <td>Capacitar a los integrantes del grupo</td>
+        <td>Asignar módulos más complejos a los integrantes con más experiencia</td>
+      </tr>
+      <tr>
+        <td>Riesgo del producto</td>
+        <td>Desconocimiento de las tecnologías utilizadas en el proyecto</td>
+        <td>Capacitar a los integrantes del grupo</td>
+        <td>Asignar módulos más complejos a los integrantes con más experiencia</td>
+      </tr>
+      <tr>
+        <td>Riesgo del producto</td>
+        <td>Desconocimiento de las tecnologías utilizadas en el proyecto</td>
+        <td>Capacitar a los integrantes del grupo</td>
+        <td>Asignar módulos más complejos a los integrantes con más experiencia</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 ## Cronograma de desarrollo
 

@@ -17,7 +17,8 @@ Draft
 Draft -->
 
 ## Desarrollo de software
---- 
+
+---
 
 El aplicativo se desarrollará con las tecnologías:
 
