@@ -21,7 +21,7 @@ services:
         - "traefik.http.routers.back.entrypoints=websecure"
         - "traefik.http.routers.back.rule=Host(`back.juferoga.live`)"
         - "traefik.http.routers.back.service=back"
-        - "traefik.http.services.back.loadbalancer.server.port=80"
+        - "traefik.http.services.back.loadbalancer.server.port=8000"
 networks:
     proxy:
       external: true
