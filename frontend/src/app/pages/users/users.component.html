@@ -1,15 +1,9 @@
 <p-tabView>
-    <p-tabPanel header="Empleados" (click)="getEmployees()">
+    <p-tabPanel header="Empleados">
         <div>
             <p-toolbar styleClass="mb-4 gap-2">
                 <ng-template pTemplate="left">
-                    <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNewEmpleado()"></button>
-                    <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedEmpleados()" [disabled]="!selectedEmpleados || !selectedEmpleados.length"></button>
-                </ng-template>
-        
-                <ng-template pTemplate="right">
-                    <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
-                    <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+                    <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNewEmpleado()"></button>
                 </ng-template>
             </p-toolbar>
         
@@ -23,7 +17,7 @@
                 [(selection)]="selectedEmpleados"
                 [rowHover]="true"
                 dataKey="id"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros"
                 [showCurrentPageReport]="true"
             >
                 <ng-template pTemplate="caption">
@@ -38,8 +32,8 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th pSortableColumn="name" style="min-width:15rem">Nombre <p-sortIcon field="name"></p-sortIcon></th>
-                        <th pSortableColumn="email">Correo Electronico <p-sortIcon field="price"></p-sortIcon></th>
-                        <th pSortableColumn="telefono" style="min-width:10rem">Telefono <p-sortIcon field="category"></p-sortIcon></th>
+                        <th pSortableColumn="email">Correo electrónico <p-sortIcon field="price"></p-sortIcon></th>
+                        <th pSortableColumn="telefono" style="min-width:10rem">Teléfono <p-sortIcon field="category"></p-sortIcon></th>
                         <th pSortableColumn="rol">Rol <p-sortIcon field="rating"></p-sortIcon></th>
                         <th pSortableColumn="active" style="min-width:10rem">Estado<p-sortIcon field="inventoryStatus"></p-sortIcon></th>
                         <th></th>
@@ -59,7 +53,7 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="summary">
-                    <div class="flex align-items-center justify-content-between">In total there are {{ empleados ? empleados.length : 0 }} empleados.</div>
+                    <div class="flex align-items-center justify-content-between">En total hay {{ empleados ? empleados.length : 0 }} empleados.</div>
                 </ng-template>
             </p-table>
         </div>
@@ -94,7 +88,7 @@
                 <div class="field">
                     <label for="documenttype">Tipo de documento</label>
                     <!-- Acá iría CC o TI o CE -->    
-                    <select id="documenttype" [(ngModel)]="empleado.t_id">
+                    <select class="form-select" id="documenttype" [(ngModel)]="empleado.t_id">
                             <option selected disabled value="null">Seleccione tipo de documento </option>
                             <option value="1">Cédula de ciudadanía</option>
                             <option value="2">Tarjeta de Identidad</option>
@@ -151,19 +145,12 @@
                 <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveEmpleado()"></button>
             </ng-template>
         </p-dialog>
-        <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
     </p-tabPanel>
-    <p-tabPanel header="Clientes" (click)="getCustomers()">
+    <p-tabPanel header="Clientes">
         <div>
             <p-toolbar styleClass="mb-4 gap-2">
                 <ng-template pTemplate="left">
-                    <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNewCliente()"></button>
-                    <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedClientes()" [disabled]="!selectedClientes || !selectedClientes.length"></button>
-                </ng-template>
-        
-                <ng-template pTemplate="right">
-                    <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
-                    <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+                    <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNewCliente()"></button>
                 </ng-template>
             </p-toolbar>
         
@@ -177,7 +164,7 @@
                 [(selection)]="selectedClientes"
                 [rowHover]="true"
                 dataKey="id"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} registros"
                 [showCurrentPageReport]="true"
             >
                 <ng-template pTemplate="caption">
@@ -213,7 +200,7 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="summary">
-                    <div class="flex align-items-center justify-content-between">In total there are {{ clientes ? clientes.length : 0 }} clientes.</div>
+                    <div class="flex align-items-center justify-content-between">En total hay {{ clientes ? clientes.length : 0 }} clientes.</div>
                 </ng-template>
             </p-table>
         </div>
@@ -283,6 +270,6 @@
                 <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveCliente()"></button>
             </ng-template>
         </p-dialog>
-        <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
     </p-tabPanel>
 </p-tabView>
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

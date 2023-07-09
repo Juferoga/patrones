@@ -49,7 +49,8 @@ export class UsersComponent {
   selectedClientes: Customer[];
   clienteDialog: boolean;
 
-  submitted: boolean = false;
+  submittedEmpleado: boolean = false;
+  submittedCliente: boolean = false;
   statuses!: any[];
 
   isModeEdited: boolean = false;
@@ -68,7 +69,7 @@ export class UsersComponent {
 
   openNewEmpleado() {
     this.empleado = this.new_empleado;
-    this.submitted = false;
+    this.submittedEmpleado = false;
     this.empleadoDialog = true;
   }
 
@@ -119,14 +120,15 @@ export class UsersComponent {
 
   hideDialogEmpleado() {
     this.empleadoDialog = false;
-    this.submitted = false;
+    this.submittedEmpleado = false;
   }
 
   saveEmpleado() {
-    this.submitted = true;
+    this.submittedEmpleado =true;
 
     if (this.empleado.name?.trim()) {
       if (this.empleado.t_id) {
+        console.log("si existe")
         this.empleados[this.findIndexByIdEmpleado(this.empleado.t_id)] =
           this.empleado;
         this.messageService.add({
@@ -136,13 +138,27 @@ export class UsersComponent {
           life: 3000,
         });
       } else {
-        this.empleados.push(this.empleado);
-        this.messageService.add({
-          severity: "success",
-          summary: "Successful",
-          detail: "empleado Created",
-          life: 3000,
-        });
+        console.log("no existe")
+        console.log(this.userService.createUserEmp(this.empleado).subscribe((data)=>{console.log(data)}))
+        this.userService.createUserEmp(this.empleado).subscribe(
+          (empleado:Employee) =>{
+            this.empleados.push(empleado);
+            this.messageService.add({
+              severity: "success",
+              summary: "Successful",
+              detail: "empleado Created",
+              life: 3000,
+            })
+          },
+          (error) =>{
+            this.messageService.add({
+              severity: "error",
+              summary: "Error",
+              detail: "Employee not Created",
+              life: 3000,
+            });
+          }
+        )
       }
 
       this.empleados = [...this.empleados];
@@ -165,7 +181,7 @@ export class UsersComponent {
 
   openNewCliente() {
     this.cliente = null;
-    this.submitted = false;
+    this.submittedCliente = false;
     this.clienteDialog = true;
   }
 
@@ -216,11 +232,11 @@ export class UsersComponent {
 
   hideDialogCliente() {
     this.clienteDialog = false;
-    this.submitted = false;
+    this.submittedCliente = false;
   }
 
   saveCliente() {
-    this.submitted = true;
+    this.submittedCliente = true;
 
     if (this.cliente.name?.trim()) {
       if (this.cliente.t_id) {

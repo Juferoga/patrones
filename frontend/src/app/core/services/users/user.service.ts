@@ -7,6 +7,7 @@ import { Customer, Employee, User } from '../../models/users/user.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
 
   headers = new HttpHeaders();
@@ -64,10 +65,21 @@ export class UserService {
       {headers: this.headers}
     )
   }
-  createUserEmp(usuario):Observable<User>{
-    var body = JSON.stringify(usuario)
-    return this.http.post<User>(
-      environment.api + 'represent/create/',
+  createUserEmp(usuario:Employee):Observable<Employee>{
+    var body = JSON.stringify({
+      "n_id": usuario.n_id,
+      "t_id": usuario.t_id ,
+      "n_phone": usuario.n_phone,
+      "email": usuario.email,
+      "name": usuario.name,
+      "password": usuario.password,
+      "n_salary": usuario.n_salary,
+      "d_start_contract": usuario.d_start_contract,
+      "d_end_contract": usuario.d_end_contract,
+      "t_rol": usuario.t_rol
+    })
+    return this.http.post<Employee>(
+      environment.api + 'user/employee/create/',
       body,
       {headers: this.headers}
     )

@@ -19,6 +19,7 @@ export class StockComponent {
   statusesSnack!: any[];
 
   ticketDialog: boolean = false;
+  
   tickets!: Ticket[];
   ticket!: Ticket;
   selectedTickets!: Ticket[] | null;
@@ -33,7 +34,15 @@ export class StockComponent {
   ) {}
 
   ngOnInit() {
+    this.getSnacks();
+    this.getTickets();
+  }
+
+  getSnacks() {
     this.snackService.getSnacks().subscribe((data) => (this.snacks = data));
+  }
+
+  getTickets() {
     this.ticketService.getTickets().subscribe((data) => (this.tickets = data));
   }
 
@@ -74,14 +83,25 @@ export class StockComponent {
       header: "Confirm",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
-        this.snacks = this.snacks.filter((val) => val.pk_id !== snack.pk_id);
-        this.snack = proto_prod_snack;
-        this.messageService.add({
-          severity: "success",
-          summary: "Successful",
-          detail: "Snack Deleted",
-          life: 3000,
-        });
+        this.snackService.deleteSnack(snack).subscribe(
+          (snack) => {
+            this.messageService.add({
+              severity: "success",
+              summary: "Successful",
+              detail: "Snack Deleted",
+              life: 3000,
+            }); 
+            this.getSnacks(); 
+          },
+          (error) =>{
+            this.messageService.add({
+              severity: "error",
+              summary: "Error",
+              detail: "Snack not Delete",
+              life: 3000,
+            });
+          }
+        )
       },
     });
   }
@@ -96,21 +116,45 @@ export class StockComponent {
 
     if (this.snack.t_name?.trim()) {
       if (this.snack.pk_id) {
-        this.snacks[this.findIndexByIdSnack(this.snack.pk_id)] = this.snack;
-        this.messageService.add({
-          severity: "success",
-          summary: "Successful",
-          detail: "Snack Updated",
-          life: 3000,
-        });
+        this.snackService.updateSnack(this.snack).subscribe(
+         (snack : Snack) => {
+           this.snacks[this.findIndexByIdSnack(snack.pk_id)] = snack;
+           this.messageService.add({
+             severity: "success",
+             summary: "Successful",
+             detail: "Snack Updated",
+             life: 3000,
+           });
+         },
+         (error) =>{
+          this.messageService.add({
+            severity: "error",
+            summary: "Error",
+            detail: "Snack not Update",
+            life: 3000,
+          });
+        } 
+        )
       } else {
-        this.snacks.push(this.snack);
-        this.messageService.add({
-          severity: "success",
-          summary: "Successful",
-          detail: "Snack Created",
-          life: 3000,
-        });
+        this.snackService.setSnack(this.snack).subscribe(
+          (snack: Snack) => {
+            this.snacks.push(snack);
+            this.messageService.add({
+              severity: "success",
+              summary: "Successful",
+              detail: "Snack Created",
+              life: 3000,
+            });
+          },
+          (error) =>{
+            this.messageService.add({
+              severity: "error",
+              summary: "Error",
+              detail: "Snack not Created",
+              life: 3000,
+            });
+          }
+        )
       }
 
       this.snacks = [...this.snacks];
@@ -180,14 +224,25 @@ export class StockComponent {
       header: "Confirm",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
-        this.tickets = this.tickets.filter((val) => val.pk_id !== ticket.pk_id);
-        this.ticket = proto_prod_ticket;
-        this.messageService.add({
-          severity: "success",
-          summary: "Successful",
-          detail: "Ticket Deleted",
-          life: 3000,
-        });
+        this.ticketService.deleteTicket(ticket).subscribe(
+          (ticket)=>{
+            this.messageService.add({
+              severity: "success",
+              summary: "Successful",
+              detail: "Ticket Deleted",
+              life: 3000,
+            });
+            this.getTickets();
+          },
+          (error) =>{
+            this.messageService.add({
+              severity: "error",
+              summary: "Error",
+              detail: "Ticket not Delete",
+              life: 3000,
+            });
+          }
+        )
       },
     });
   }
@@ -202,21 +257,48 @@ export class StockComponent {
 
     if (this.ticket.t_name?.trim()) {
       if (this.ticket.pk_id) {
-        this.tickets[this.findIndexByIdTicket(this.ticket.pk_id)] = this.ticket;
-        this.messageService.add({
-          severity: "success",
-          summary: "Successful",
-          detail: "Ticket Updated",
-          life: 3000,
-        });
-      } else {
-        this.tickets.push(this.ticket);
-        this.messageService.add({
-          severity: "success",
-          summary: "Successful",
-          detail: "Ticket Created",
-          life: 3000,
-        });
+        this.ticketService.updateTicket(this.ticket).subscribe(
+          (ticket : Ticket) => {
+            this.tickets[this.findIndexByIdTicket(ticket.pk_id)] = ticket;
+            this.messageService.add({
+              severity: "success",
+              summary: "Successful",
+              detail: "Ticket Updated",
+              life: 3000,
+            });
+
+          },
+          (error) =>{
+            this.messageService.add({
+              severity: "error",
+              summary: "Error",
+              detail: "Ticket not Update",
+              life: 3000,
+            });
+          }
+        )
+      }
+      
+      else {
+        this.ticketService.setTicket(this.ticket).subscribe(
+          (ticket : Ticket) => {
+            this.tickets.push(ticket);
+            this.messageService.add({
+              severity: "success",
+              summary: "Successful",
+              detail: "Ticket Created",
+              life: 3000,
+            });
+          },
+          (error) =>{
+            this.messageService.add({
+              severity: "error",
+              summary: "Error",
+              detail: "Ticket not Created",
+              life: 3000,
+            });
+          }
+        )
       }
 
       this.tickets = [...this.tickets];

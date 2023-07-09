@@ -29,4 +29,40 @@ export class TicketService {
       {headers: this.headers}
     )
   }
+  
+  setTicket(ticket: Ticket):Observable<Ticket> {
+    var body = JSON.stringify({
+      "t_name":ticket.t_name ,
+      "t_description": ticket.t_description,
+      "n_price": ticket.n_price,
+      "b_state": false
+
+  });
+    return this.http.post<Ticket>(
+      environment.api + 'product/ticket/',
+      body,
+      {headers: this.headers}
+    )
+  }
+  updateTicket(ticket: Ticket):Observable<Ticket> {
+    var body = JSON.stringify({
+      "t_name":ticket.t_name ,
+      "t_description": ticket.t_description,
+      "n_price": ticket.n_price,
+      "b_state": ticket.b_state
+  });
+    return this.http.patch<Ticket>(
+      environment.api + 'product/ticket/'+ ticket.pk_id +'/',
+      body,
+      {headers: this.headers}
+    )
+  }
+  deleteTicket(ticket: Ticket):Observable<any> {
+
+    return this.http.delete(
+      environment.api + 'product/ticket/'+ ticket.pk_id +'/',
+      {headers: this.headers}
+    )
+  }
+
 }
