@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { ConfirmationService, MessageService } from "primeng/api";
-import { User } from "src/app/core/models/users/user.model";
+import { Customer, Employee, User } from "src/app/core/models/users/user.model";
 import { UserService } from "src/app/core/services/users/user.service";
 @Component({
   selector: "app-users",
@@ -9,231 +9,152 @@ import { UserService } from "src/app/core/services/users/user.service";
   styleUrls: ["./users.component.scss"],
 })
 export class UsersComponent {
-  usuarios: User[];
-  userDialog: boolean;
-  usuario: User =	{
-		nombre: "",
-		apellido: "",
-		fecha_de_nacimiento: new Date(Date.now()),
-		genero: "",
-		telefono: 0,
-		direccion: "",
-		email: "",
-		estado: "",
+  empleado : Employee;
+  new_empleado: Employee = {
+    "n_id": 0,
+    "t_id": "",
+    "n_phone": 0,
+    "email": "",
+    "name": "",
+    "is_active": false,
+    "is_superuser": false,
+    "is_staff": false,
+    "last_login": false,
+    "password": "",
+    "n_salary": 0,
+    "d_start_contract": new Date("2023-07-08T00:00:00.000Z"),
+    "d_end_contract": new Date("2023-07-08T00:00:00.000Z"),
+    "t_rol": 0,
+    "fk_cinema": 0
+  };
+  empleados: Employee[];
+  selectedEmpleados: Employee[];
+  empleadoDialog: boolean;
 
-	};
-  selectedusuarios: User[];
-  submitted: boolean;
-  statuses: any[];
-	selectedUserType:string=''
-	//Para llenar en representante
-	paisesList: any[];
-	regionesList: any[];
-  clasificacionList: any[];
-  // cliente
-	ciudadesList: any;
-	representantesList:any[];
-  isModeEdited:boolean = false;
+  cliente: Customer;
+  new_cliente: Customer = {
+    "n_id": 0,
+    "t_id": "",
+    "n_phone": 0,
+    "email": "",
+    "name": "",
+    "is_active": false,
+    "is_superuser": false,
+    "is_staff": false,
+    "last_login": false,
+    "password": "",
+    "n_points": 0
+  };
+  clientes: Customer[];
+  selectedClientes: Customer[];
+  clienteDialog: boolean;
+
+  submitted: boolean = false;
+  statuses!: any[];
+
+  isModeEdited: boolean = false;
 
   constructor(
     private userService: UserService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-		private http: HttpClient,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
-
-    this.loadData();
-
-    this.userService.getUsers().subscribe(
-      (users) => {
-        this.usuarios = users["data"];
-        this.messageService.add({
-          key: "grl-toast",
-          severity: "success",
-          summary: "Consulta exitosa",
-          detail: "La consulta se realizo correctamente sobre la base de datos - Usuarios Cargados",
-        });
-      },
-      (err) => {
-        this.messageService.add({
-          key: "grl-toast",
-          severity: "error",
-          summary: "Consulta realizada SIN ÉXITO - Usuarios No cargados",
-          detail: "::: ERROR ::: \n" + err["error"]["detail"],
-        });
-      }
-    );
-
-    this.statuses = [
-      { label: "MASCULINO", value: "M" },
-      { label: "FEMENINO", value: "F" },
-      { label: "NO BINARIO", value: "N" },
-    ];
+    this.getCustomers()
+    this.getEmployees()
   }
 
-  openNew() {
-    this.usuario = {
-      nombre: "",
-      apellido: "",
-      fecha_de_nacimiento: new Date(Date.now()),
-      genero: "",
-      telefono: 0,
-      direccion: "",
-      email: "",
-      estado: "",
-    };
+  openNewEmpleado() {
+    this.empleado = this.new_empleado;
     this.submitted = false;
-    this.userDialog = true;
+    this.empleadoDialog = true;
   }
 
-  deleteSelectedusuarios() {
+  deleteSelectedEmpleados() {
     this.confirmationService.confirm({
-      message: "Estas seguro de eliminar a los usuarios?",
-      header: "Confirmar",
+      message: "Are you sure you want to delete the selected empleados?",
+      header: "Confirm",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
-        this.usuarios = this.usuarios.filter(
-          (val) => !this.selectedusuarios.includes(val)
+        this.empleados = this.empleados.filter(
+          (val) => !this.selectedEmpleados?.includes(val)
         );
-        this.selectedusuarios = null;
+        this.selectedEmpleados = null;
         this.messageService.add({
           severity: "success",
           summary: "Successful",
-          detail: "Usuarios eliminados.",
+          detail: "empleados Deleted",
           life: 3000,
         });
       },
     });
   }
 
-  editUsuario(usuario: User) {
-    this.isModeEdited = true;
-    this.usuario = { ...usuario };
-    let fecha = this.usuario.fecha_de_nacimiento.toString().split('T')[0];
-    this.usuario.fecha_de_nacimiento = (fecha as any);
-    this.userDialog = true;
+  editEmpleado(empleado: Employee) {
+    this.empleado = { ...empleado };
+    this.empleadoDialog = true;
   }
 
-  deleteUsuario(usuario: User) {
+  deleteEmpleado(empleado: Employee) {
     this.confirmationService.confirm({
-      message: "Estas seguro que deseas eliminar a " + usuario.nombre + "?",
-      header: "Confirmar",
+      message: "Are you sure you want to delete " + empleado.name + "?",
+      header: "Confirm",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
-        this.usuarios = this.usuarios.filter(
-          (val) => val.email !== usuario.email
+        this.empleados = this.empleados.filter(
+          (val) => val.n_id !== empleado.n_id
         );
-        this.usuario = null;
+        this.empleado = null;
         this.messageService.add({
           severity: "success",
           summary: "Successful",
-          detail: "Usuario eliminado",
+          detail: "empleado Deleted",
           life: 3000,
         });
       },
     });
   }
 
-  hideDialog() {
-    this.userDialog = false;
+  hideDialogEmpleado() {
+    this.empleadoDialog = false;
     this.submitted = false;
   }
 
-  saveUsuario() {
+  saveEmpleado() {
     this.submitted = true;
 
-    if (this.usuario.email.trim()) {
-      if (!this.findIndexById(this.usuario.email)) {
-        this.userService.setUser(this.usuario).subscribe(
-          (data)=> {
-            this.usuarios[this.findIndexById(this.usuario.email)] = data['data'];
-            this.messageService.add({
-              severity: "success",
-              summary: "Successful",
-              detail: "usuario Actualizado",
-              life: 3000,
-            });
-          },
-          (err)=> {
-            this.messageService.add({
-              severity: "error",
-              summary: "Error",
-              detail: "usuario NO Actualizado"+err,
-              life: 3000,
-            });
-          }
-        )
+    if (this.empleado.name?.trim()) {
+      if (this.empleado.t_id) {
+        this.empleados[this.findIndexByIdEmpleado(this.empleado.t_id)] =
+          this.empleado;
+        this.messageService.add({
+          severity: "success",
+          summary: "Successful",
+          detail: "empleado Updated",
+          life: 3000,
+        });
       } else {
-        this.usuario.estado = 'A';
-        if(this.selectedUserType == 'representante'){
-          this.userService.createUserRep(this.usuario).subscribe({
-            next:(res)=>{ 
-              console.log(res);
-              //this.usuarios.push(this.usuario);
-              this.usuarios.push(res['data']) ;
-              this.messageService.add({
-                severity: "success",
-                summary: "Successful",
-                detail: "Usuario Creado",
-                life: 3000,
-              });
-            },
-            error:(err)=>{
-              this.messageService.add({
-                severity: "error",
-                summary: "Error",
-                detail: "Usuario NO Creado"+err,
-                life: 3000,
-              });
-            }
-          });
-        }
-        else{
-          this.userService.createUserCli(this.usuario).subscribe({
-            next:(res)=>{ 
-              console.log(res);
-              //this.usuarios.push(this.usuario);
-              this.usuarios.push(res['data']) ;
-              this.messageService.add({
-                severity: "success",
-                summary: "Successful",
-                detail: "usuario Creado",
-                life: 3000,
-              });
-            },
-            error:(err)=>{
-              this.messageService.add({
-                severity: "error",
-                summary: "Error",
-                detail: "usuario NO Creado"+err,
-                life: 3000,
-              });
-            }
-          });
-        }
+        this.empleados.push(this.empleado);
+        this.messageService.add({
+          severity: "success",
+          summary: "Successful",
+          detail: "empleado Created",
+          life: 3000,
+        });
       }
 
-      this.usuarios = [...this.usuarios];
-      this.userDialog = false;
-      this.usuario = {
-				nombre: "",
-				apellido: "",
-				fecha_de_nacimiento: new Date(Date.now()),
-				genero: "",
-				telefono: 0,
-				direccion: "",
-				email: "",
-				estado: "",
-			};
+      this.empleados = [...this.empleados];
+      this.empleadoDialog = false;
+      this.empleado = null;
     }
   }
 
-  findIndexById(id: string): number {
+  findIndexByIdEmpleado(id: string): number {
     let index = -1;
-    for (let i = 0; i < this.usuarios.length; i++) {
-      if (this.usuarios[i].email === id) {
+    for (let i = 0; i < this.empleados.length; i++) {
+      if (this.empleados[i].t_id === id) {
         index = i;
         break;
       }
@@ -242,39 +163,132 @@ export class UsersComponent {
     return index;
   }
 
-  getSeverity(status: string) {
-    switch (status) {
-      case "M":
-        return "success";
-      case "F":
-        return "success";
-      case "N":
-        return "success";
-      default:
-        return "danger";
+  openNewCliente() {
+    this.cliente = null;
+    this.submitted = false;
+    this.clienteDialog = true;
+  }
+
+  deleteSelectedClientes() {
+    this.confirmationService.confirm({
+      message: "Are you sure you want to delete the selected empleados?",
+      header: "Confirm",
+      icon: "pi pi-exclamation-triangle",
+      accept: () => {
+        this.clientes = this.clientes.filter(
+          (val) => !this.selectedClientes?.includes(val)
+        );
+        this.selectedEmpleados = null;
+        this.messageService.add({
+          severity: "success",
+          summary: "Successful",
+          detail: "empleados Deleted",
+          life: 3000,
+        });
+      },
+    });
+  }
+
+  editCliente(cliente: Customer) {
+    this.cliente = { ...cliente };
+    this.clienteDialog = true;
+  }
+
+  deleteCliente(cliente: Customer) {
+    this.confirmationService.confirm({
+      message: "Are you sure you want to delete " + cliente.name + "?",
+      header: "Confirm",
+      icon: "pi pi-exclamation-triangle",
+      accept: () => {
+        this.clientes = this.clientes.filter(
+          (val) => val.n_id !== cliente.n_id
+        );
+        this.cliente = null;
+        this.messageService.add({
+          severity: "success",
+          summary: "Successful",
+          detail: "empleado Deleted",
+          life: 3000,
+        });
+      },
+    });
+  }
+
+  hideDialogCliente() {
+    this.clienteDialog = false;
+    this.submitted = false;
+  }
+
+  saveCliente() {
+    this.submitted = true;
+
+    if (this.cliente.name?.trim()) {
+      if (this.cliente.t_id) {
+        this.clientes[this.findIndexByIdEmpleado(this.cliente.t_id)] =
+          this.cliente;
+        this.messageService.add({
+          severity: "success",
+          summary: "Successful",
+          detail: "empleado Updated",
+          life: 3000,
+        });
+      } else {
+        this.clientes.push(this.cliente);
+        this.messageService.add({
+          severity: "success",
+          summary: "Successful",
+          detail: "empleado Created",
+          life: 3000,
+        });
+      }
+
+      this.clientes = [...this.clientes];
+      this.clienteDialog = false;
+      this.cliente = null;
     }
   }
 
-	cargarContenidoJSON(ruta):any{
-		return this.http.get(ruta)
-	}
+  findIndexByIdCliente(id: string): number {
+    let index = -1;
+    for (let i = 0; i < this.clientes.length; i++) {
+      if (this.clientes[i].t_id === id) {
+        index = i;
+        break;
+      }
+    }
 
-	loadData(){
-		this.cargarContenidoJSON('../../../assets/json/paises.json').subscribe(
-			(data) => {this.paisesList = data;},
-			(error) => {console.error(error);}
-		);
-		this.cargarContenidoJSON('../../../assets/json/regiones-colombia.json').subscribe(
-			(data) => {this.regionesList = data;},
-			(error) => {console.error(error);}
-		);
-		this.cargarContenidoJSON('../../../assets/json/ciudades-colombia.json').subscribe(
-			(data) => {this.ciudadesList = data;},
-			(error) => {console.error(error);}
-		);
-	}
+    return index;
+  }
 
-  onloadRegion(country){
-    
+  getCustomers(){
+    this.userService.getUsersCustomer().subscribe(
+      (data) => {
+        this.clientes = data;
+      },
+      (err)=>{
+        this.messageService.add({
+          severity: "error",
+          summary: "Error",
+          detail: "Error en la petición",
+          life: 3000,
+        });
+      }
+    )
+  }
+
+  getEmployees(){
+    this.userService.getUsersEmployee().subscribe(
+      (data) => {
+        this.empleados = data;
+      },
+      (err)=>{
+        this.messageService.add({
+          severity: "error",
+          summary: "Error",
+          detail: "Error en la petición",
+          life: 3000,
+        });
+      }
+    )
   }
 }

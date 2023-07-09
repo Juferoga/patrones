@@ -26,7 +26,7 @@ export class ProfileComponent {
     ? localStorage.getItem("username")
     : "Loading...";
   representantes: any[];
-  user: User = this.userLoading;
+  user: any ;
   data: any;
   chartOptions: any;
   isEdited: boolean = false;
@@ -94,8 +94,8 @@ export class ProfileComponent {
   }
 
   editUsuario() {
-    let fecha = this.user.fecha_de_nacimiento.toString().split("T")[0];
-    this.user.fecha_de_nacimiento = fecha as any;
+    // let fecha = this.user.fecha_de_nacimiento.toString().split("T")[0];
+    // this.user.fecha_de_nacimiento = fecha as any;
   }
   deleteUser() {
     this.isDeleteUser=true

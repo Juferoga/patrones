@@ -1,55 +1,26 @@
-export class User{
-  id ?: number;
-  nombre: string;
-  apellido: string;
-  fecha_de_nacimiento: Date;
-  genero: string;
-  telefono: number;
-  direccion: string;
-  email: string;
-  estado: string = 'A';
-  username?: string;
-  representante?: string;
-  ciudad?: string;
-  
-  contrato?: string;
-  region?: string;
-  pais?: string;
-  clasificacion?: string;
-  
-  password?: string;
+const roles = ['Administrador', 'Empleado', 'Cliente']
 
-  constructor(){
-  }
+export class User{
+  n_id ?: number;
+  t_id: string;
+  n_phone:number;
+  email: string;
+  name: string;
+  is_active:boolean;
+  is_superuser:boolean;
+  is_staff:boolean;
+  last_login:boolean; 
+  password:string;  
 }
 
-// export class User{
-//   id : number;
-//   nombre : string;
-//   apellido : string;
-//   fecha_de_nacimiento : Date;
-//   genero : string;
-//   telefono : number;
-//   direccion : string;
-//   email : string;
-//   estado : string;
+export class Employee extends User {
+  n_salary:number;
+  d_start_contract:Date;
+  d_end_contract:Date;
+  t_rol:number;
+  fk_cinema : number;
+}
 
-//   constructor(){
-//   }
-// }
-
-// export class UserOfDB extends User{
-//   username : string;
-//   password
-// }
-
-// export class Representante extends UserOfDB{
-//   contrato : Date;
-//   region : string;
-//   pais : string;
-//   clasificacion : string;
-// }
-
-// export class Cliente extends UserOfDB{
-//   ciudad : string;
-// }
+export class Customer extends User{
+  n_points:number; 
+}

@@ -5,30 +5,37 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+from rest_framework import viewsets, permissions
 
 
 class EmployeeCreateView(generics.CreateAPIView):
     queryset = Employee.objects.all()
+    permission_classes = (permissions.AllowAny,)
     serializer_class = EmployeeSerializer
 
 class EmployeeDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employee.objects.all()
+    permission_classes = (permissions.AllowAny,)
     serializer_class = EmployeeSerializer
 
 class EmployeeListView(generics.ListAPIView):
     queryset = Employee.objects.all()
+    permission_classes = (permissions.AllowAny,)
     serializer_class = EmployeeSerializer
 
 class CustomerCreateView(generics.CreateAPIView):
     queryset = Customer.objects.all()
+    permission_classes = (permissions.AllowAny,)
     serializer_class = CustomerSerializer
 
 class CustomerDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Customer.objects.all()
+    permission_classes = (permissions.AllowAny,)
     serializer_class = CustomerSerializer
 
 class CustomerListView(generics.ListAPIView):
     queryset = Customer.objects.all()
+    permission_classes = (permissions.AllowAny,)
     serializer_class = CustomerSerializer
 
 class CustomAuthToken(ObtainAuthToken):

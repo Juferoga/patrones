@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { User } from '../../models/users/user.model';
+import { Customer, Employee, User } from '../../models/users/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class UserService {
     this.headers = this.headers.append("Content-Type", "application/json");
   }
 
-  getUserbByUsername(username):Observable<User>{
+  getUserByUsername(username):Observable<User>{
     return this.http.get<User>(
       environment.api + 'user/'+username+'/',
       {headers: this.headers}
@@ -51,7 +51,20 @@ export class UserService {
       {headers: this.headers}
     )
   }
-  createUserRep(usuario):Observable<User>{
+
+  getUsersEmployee():Observable<Employee[]>{
+    return this.http.get<Employee[]>(
+      environment.api + 'user/employee/list/',
+      {headers: this.headers}
+    )
+  }
+  getUsersCustomer():Observable<Customer[]>{
+    return this.http.get<Customer[]>(
+      environment.api + 'user/customer/list/',
+      {headers: this.headers}
+    )
+  }
+  createUserEmp(usuario):Observable<User>{
     var body = JSON.stringify(usuario)
     return this.http.post<User>(
       environment.api + 'represent/create/',
