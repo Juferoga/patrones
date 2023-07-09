@@ -51,16 +51,19 @@ class CustomUserManager(UserManager):
   def create_superuser(self, email=None, password=None, **extra_fields):
     extra_fields.setdefault("is_staff", True)
     extra_fields.setdefault("is_superuser", True)
+    extra_fields.setdefault("t_rol", 0)
     return self._create_user(email, password, **extra_fields)
   
   def create_cliente(self, email=None, password=None, **extra_fields):
     extra_fields.setdefault("is_staff", False)
     extra_fields.setdefault("is_superuser", False)
+    extra_fields.setdefault("t_rol", 3)
     return self._create_user(email, password, **extra_fields)
     
   def create_empleado(self, email=None, password=None, **extra_fields):
     extra_fields.setdefault("is_staff", True)
     extra_fields.setdefault("is_superuser", False)
+    extra_fields.setdefault("t_rol", 2)
     return self._create_user(email, password, **extra_fields)
   
 class User(AbstractBaseUser, PermissionsMixin):

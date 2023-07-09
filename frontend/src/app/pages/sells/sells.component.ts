@@ -7,13 +7,4 @@ import { Component } from '@angular/core';
 })
 export class SellsComponent {
 
-  comision :any = {};
-
-  constructor(
-    ) { }
-
-  ngOnInit() {
-    
-  }
-
 }
