@@ -7,6 +7,37 @@ from ..seat.models import Seat
 from ..function.models import Function
 from ..movie.models import Movies
 from rest_framework import permissions
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.template.loader import get_template
+from weasyprint import HTML
+
+def generate_pdf(request):
+    total_purchase_value = Purchase.objects.aggregate(total_value=Sum('n_total_value'))['total_value']
+    average_score = Purchase.objects.aggregate(avg_score=Avg('n_score'))['avg_score']
+    purchase_product_count = Purchase.objects.annotate(product_count=Count('fk_product')).values('pk_id', 'product_count')
+    average_price = Product.objects.aggregate(avg_price=Avg('n_price'))['avg_price']
+    total_reserved_seats = Seat.objects.aggregate(total_seats=Sum('b_state'))['total_seats']
+    function_count_per_movie = Function.objects.values('fk_movie').annotate(function_count=Count('pk_id'))
+    purchase_count_per_client = Purchase.objects.values('fk_client').annotate(purchase_count=Count('pk_id'))
+    average_duration = Movies.objects.aggregate(avg_duration=Avg('n_duration'))['avg_duration']
+    stats = {
+        'total_purchase_value': total_purchase_value,
+        'average_score': average_score,
+        'purchase_product_count': list(purchase_product_count),
+        'average_price': average_price,
+        'total_reserved_seats': total_reserved_seats,
+        'function_count_per_movie': list(function_count_per_movie),
+        'purchase_count_per_client': list(purchase_count_per_client),
+        'average_duration': average_duration
+    }
+
+    template = get_template('report.html')
+    html = template.render(stats)
+    response = HttpResponse(content_type='application/pdf')
+    HTML(string=html).write_pdf(response)
+
+    return response
 
 class StatsView(APIView):
   permission_classes = (permissions.AllowAny,)
