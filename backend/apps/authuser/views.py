@@ -1,11 +1,13 @@
 from rest_framework import generics
 from .models import Employee, Customer
+from .choices import RoleChoices, TypeIdentificationChoices 
 from .serializers import EmployeeSerializer, CustomerSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework import viewsets, permissions
+from django.http import HttpResponseServerError
 
 
 class EmployeeCreateView(generics.CreateAPIView):
@@ -50,17 +52,9 @@ class CustomAuthToken(ObtainAuthToken):
             'token': token.key,
             'user_id': user.pk,
             'email': user.email,
+            'role' : dict(RoleChoices.choices)[user.t_rol],
+            'username' : user.name
         }
-
-        if isinstance(user, Employee):
-            response_data['role'] = user.t_rol
-            response_data['username'] = user.get_full_name()
-        elif isinstance(user, Customer):
-            response_data['role'] = 'Cliente'
-            response_data['username'] = user.get_full_name()
-        else:
-            response_data['role'] = 'Administrador Administrador'
-            response_data['username'] = user.get_full_name()
 
         return Response(response_data)
     
@@ -73,21 +67,40 @@ class UserProfileView(generics.RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
         user = request.user
-        if isinstance(user, Employee):
+
+        print(user.t_rol)
+        print(dict(RoleChoices.choices)[user.t_rol])
+        
+        if user.t_rol == 2 or user.t_rol == 1:
             serializer = EmployeeSerializer(user)
             data = serializer.data
             data['role'] = user.t_rol
             data['username'] = user.get_full_name()
-        elif isinstance(user, Customer):
+            data['id'] = user.n_id
+            data['email'] = user.email
+            data['n_salary'] = user.n_salary
+            data['d_start_contract'] = user.d_start_contract
+            data['d_end_contract'] = user.d_end_contract
+            data['fk_cinema'] = user.fk_cinema
+            data['n_phone'] = user.n_phone
+            data['is_active'] = user.is_active
+        elif user.t_rol == 3:
             serializer = CustomerSerializer(user)
             data = serializer.data
             data['role'] = 'Cliente'
+            data['id'] = user.n_id
             data['username'] = user.get_full_name()
-        else:
+            data['n_points'] = user.n_points
+            data['n_phone'] = user.n_phone
+            data['email'] = user.email
+            data['is_active'] = user.is_active
+        elif user.t_rol == 0:
             data = {
                 'user_id': user.pk,
                 'email': user.email,
                 'role': 'Administrador Administrador',
                 'username': user.get_full_name(),
             }
+        else:
+            raise SomeException("Error message")
         return Response(data)

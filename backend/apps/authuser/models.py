@@ -65,10 +65,10 @@ class CustomUserManager(UserManager):
   
 class User(AbstractBaseUser, PermissionsMixin):
 
-  # Personalized attributes for the problem
   n_id = models.IntegerField(default=0)
   t_id = models.IntegerField(choices=TypeIdentificationChoices.choices, default=TypeIdentificationChoices.CEDULA)
   n_phone = models.IntegerField(null=True)
+  t_rol = models.IntegerField(default=RoleChoices.CLIENT, choices=RoleChoices.choices)
 
   email = models.EmailField(blank=True, help_text='Correo electrónico', unique=True)
   name = models.CharField(max_length=255, blank=True, help_text='Nombre del usuario', default='')
@@ -110,7 +110,6 @@ class Employee(User):
   n_salary = models.DecimalField(max_digits=10, decimal_places=2, default=1000000)
   d_start_contract = models.DateTimeField(blank=True,default=timezone.now)
   d_end_contract = models.DateTimeField(blank=True,null=True)
-  t_rol = models.IntegerField(default=RoleChoices.EMPLOYEE, choices=RoleChoices.choices)
   fk_cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, null=True)
 
   objects = CustomUserManager()

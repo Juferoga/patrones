@@ -10,11 +10,11 @@ class ProductSerializer(serializers.ModelSerializer):
 class SnackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Snack
-        fields = ('t_name','t_description','n_price','n_stock','t_type')
+        fields = ('pk_id','t_name','t_description','n_price','n_stock','t_type')
         read_only_fields = ('pk_id',)
 
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
-        fields = ('t_name','t_description','n_price','d_creation')
+        fields = ('pk_id','t_name','t_description','n_price','d_creation','b_state')
         read_only_fields = ('pk_id',)

@@ -1,6 +1,7 @@
 from django.db import models
 
 class RoleChoices(models.IntegerChoices):
+  SUPERADMIN = 0, 'Administrador Administrador'
   ADMINISTRATOR = 1, 'Administrador'
   EMPLOYEE = 2, 'Empleado'
   CLIENT = 3, 'Cliente'
