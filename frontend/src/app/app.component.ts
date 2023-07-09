@@ -11,16 +11,20 @@ import { MessageService } from 'primeng/api';
 export class AppComponent {
   listMultiplex:Cinema[] = [];
   isClicked:boolean = false;
+  
   constructor(
     private messageService: MessageService,
     private cinemaService: CinemaService
   ) {}
-
+  
   ngOnInit() {
     this.cinemaService.getCinemas().subscribe(
-      (cinemas:Cinema[])=>{
-        this.listMultiplex = cinemas;
-      }
+    (cinemas:Cinema[])=>{
+      this.listMultiplex = cinemas;
+    }
     )
+  }
+  saveMultiplexId(multiplex_id: number) {
+    localStorage.setItem("multiplex", String(multiplex_id));
   }
 }

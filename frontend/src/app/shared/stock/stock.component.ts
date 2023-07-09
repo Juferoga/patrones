@@ -1,4 +1,7 @@
 import { Component } from "@angular/core";
+import { Snack, Ticket, proto_prod_snack, proto_prod_ticket } from "@models/products/products.model";
+import { SnackService } from "@services/products/snack.service";
+import { TicketService } from "@services/products/ticket.service";
 import { ConfirmationService, MessageService } from "primeng/api";
 
 @Component({
@@ -7,346 +10,119 @@ import { ConfirmationService, MessageService } from "primeng/api";
   styleUrls: ["./stock.component.scss"],
 })
 export class StockComponent {
+  snackDialog: boolean = false;
 
-  //Inventario
-  productDialog: boolean;
-  products: any[];
-  product: any;
-  selectedProducts: any[];
-  submitted: boolean;
-  statuses: any[];
-  Delete: string;
-  categoriesList: any[]=[];
-  bodegasList: any[];
-  bodega : any;
-  isUpdated:boolean=false;
-  //Productos
-  productosDialog: boolean;
-  productos: any[];
-  producto: any;
-  productoSeleccionado: any[];
-  //select INV
-  countryString:string='';
-  regionString:string='';
-  warehouseString:string='';
+  snacks!: Snack[];
+  snack!: Snack;
+  selectedSnacks!: Snack[] | null;
+  submittedSnack: boolean = false;
+  statusesSnack!: any[];
 
+  ticketDialog: boolean = false;
+  tickets!: Ticket[];
+  ticket!: Ticket;
+  selectedTickets!: Ticket[] | null;
+  submittedTicket: boolean = false;
+  statusesTicket!: any[];
 
   constructor(
+    private snackService: SnackService,
+    private ticketService: TicketService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit() {
-
-    this.statuses = [
-      { label: "Inactivo", value: "I" },
-      { label: "Activo", value: "A" },
-    ];
+    this.snackService.getSnacks().subscribe((data) => (this.snacks = data));
+    this.ticketService.getTickets().subscribe((data) => (this.tickets = data));
   }
 
-  openNew() {
-    this.producto = {
-      id:0,
-      producto : '',
-      nombre : '',
-      descripcion : '',
-      precio : 0,
-      estado : true,
-      categoria : ''
-    };
-    this.submitted = false;
-    this.productosDialog = true;
+  openNewSnack() {
+    this.snack = proto_prod_snack;
+    this.submittedSnack = false;
+    this.snackDialog = true;
   }
 
-  deleteSelectedProducts() {
+  deleteSelectedSnacks() {
     this.confirmationService.confirm({
-      message: "Estas seguro de eliminar los productos?",
-      header: "Confirmar",
+      message: "Are you sure you want to delete the selected snacks?",
+      header: "Confirm",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
-        this.products = this.products.filter(
-          (val) => !this.selectedProducts.includes(val)
+        this.snacks = this.snacks.filter(
+          (val) => !this.selectedSnacks?.includes(val)
         );
-        this.selectedProducts = null;
+        this.selectedSnacks = null;
         this.messageService.add({
           severity: "success",
           summary: "Successful",
-          detail: "Productos eliminados",
+          detail: "Snacks Deleted",
           life: 3000,
         });
       },
     });
   }
 
-  deleteProductInv(product: any) {
+  editSnack(snack: Snack) {
+    this.snack = { ...snack };
+    this.snackDialog = true;
+  }
+
+  deleteSnack(snack: Snack) {
     this.confirmationService.confirm({
-      message: "Are you sure you want to delete " + product.nombre + "?",
+      message: "Are you sure you want to delete " + snack.t_name + "?",
       header: "Confirm",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
-        // this.productService.deleteProduct(product.id).subscribe({
-        //   next:(response)=>{
-        //     this.messageService.add({
-        //       key: "grl-toast",
-        //       severity: "success",
-        //       summary: `Eliminación exitosa`,
-        //       detail: `La eliminación del producto ${this.producto['nombre'].toUpperCase()},
-        //       se realizo correctamente sobre la base de datos`,
-        //     });
-        //   },
-        //   error:(err)=>{
-        //     this.messageService.add({
-        //       key: "grl-toast",
-        //       severity: "error",
-        //       summary: `Eliminación del producto ${this.product['nombre'].toUpperCase()} realizada SIN ÉXITO`,
-        //       detail: "::: ERROR ::: \n" + err["error"]["detail"],
-        //     });
-        //   }
-        // })
-        this.products = this.products.filter(
-          (val) => val.producto !== product.producto
-        );
-        this.product = {
-          producto : '',
-          nombre : '',
-          descripcion : '',
-          precio : 0,
-          estado : true,
-          categoria : ''
-        };
+        this.snacks = this.snacks.filter((val) => val.pk_id !== snack.pk_id);
+        this.snack = proto_prod_snack;
+        this.messageService.add({
+          severity: "success",
+          summary: "Successful",
+          detail: "Snack Deleted",
+          life: 3000,
+        });
       },
     });
   }
 
-  editProducto(product: any) {
-    this.producto = { ...product };
-    this.isUpdated = true;
-    this.productosDialog = true;
+  hideDialogSnack() {
+    this.snackDialog = false;
+    this.submittedSnack = false;
   }
 
-  deleteProducto(product: any) {
-    this.confirmationService.confirm({
-      message: "Are you sure you want to delete " + product.nombre + "?",
-      header: "Confirm",
-      icon: "pi pi-exclamation-triangle",
-      accept: () => {
-        // this.productService.deleteProduct(Number(product.producto)).subscribe({
-        //   next:(response)=>{
-        //     this.messageService.add({
-        //       key: "grl-toast",
-        //       severity: "success",
-        //       summary: `Eliminación exitosa`,
-        //       detail: `La eliminación del producto ${this.producto['nombre'].toUpperCase()},
-        //       se realizo correctamente sobre la base de datos`,
-        //     });
-        //   },
-        //   error:(err)=>{
-        //     this.messageService.add({
-        //       key: "grl-toast",
-        //       severity: "error",
-        //       summary: `Eliminación del producto ${this.product['nombre'].toUpperCase()} realizada SIN ÉXITO`,
-        //       detail: "::: ERROR ::: \n" + err["error"]["detail"],
-        //     });
-        //   }
-        // })
-        this.products = this.products.filter(
-          (val) => val.producto !== product.producto
-        );
-        this.product = {
-          producto : '',
-          nombre : '',
-          descripcion : '',
-          precio : 0,
-          estado : true,
-          categoria : ''
-        };
-      },
-    });
-  }
+  saveSnack() {
+    this.submittedSnack = true;
 
-  hideDialog() {
-    this.productosDialog = false;
-    this.submitted = false;
-  }
+    if (this.snack.t_name?.trim()) {
+      if (this.snack.pk_id) {
+        this.snacks[this.findIndexByIdSnack(this.snack.pk_id)] = this.snack;
+        this.messageService.add({
+          severity: "success",
+          summary: "Successful",
+          detail: "Snack Updated",
+          life: 3000,
+        });
+      } else {
+        this.snacks.push(this.snack);
+        this.messageService.add({
+          severity: "success",
+          summary: "Successful",
+          detail: "Snack Created",
+          life: 3000,
+        });
+      }
 
-  createProduct() {
-    this.submitted = true;
-    this.producto.precio = Number(this.producto.precio)
-    // this.productService.createProduct(this.producto).subscribe({
-    //   next:()=>{
-    //     this.messageService.add({
-    //       key: "grl-toast",
-    //       severity: "success",
-    //       summary: `${this.isUpdated ? 'Actualización':'Creación'}  exitosa`,
-    //       detail: `La ${this.isUpdated ? 'actualización':'creación'} del producto ${this.producto['nombre'].toUpperCase()},
-    //       se realizo correctamente sobre la base de datos`,
-    //     });
-    //   },
-    //   error:(err)=>{
-    //     this.messageService.add({
-    //       key: "grl-toast",
-    //       severity: "error",
-    //       summary: `Consulta del producto ${this.producto['nombre'].toUpperCase()} realizada SIN ÉXITO`,
-    //       detail: "::: ERROR ::: \n" + err["error"]["detail"],
-    //     });
-    //   }
-    // })
-    this.productos = [...this.productos];
-    this.isUpdated = false;
-    this.productosDialog = false;
-    this.producto = {
-      producto : '',
-      nombre : '',
-      descripcion : '',
-      precio : 0,
-      estado : true,
-      categoria : ''
-    };
-  }
-
-  saveProduct() {
-    this.submitted = true;
-    this.producto.precio = Number(this.producto.precio)
-    // this.productService.createProduct(this.producto).subscribe({
-    //   next:()=>{
-    //     this.messageService.add({
-    //       key: "grl-toast",
-    //       severity: "success",
-    //       summary: `${this.isUpdated ? 'Actualización':'Creación'}  exitosa`,
-    //       detail: `La ${this.isUpdated ? 'actualización':'creación'} del producto ${this.producto['nombre'].toUpperCase()},
-    //       se realizo correctamente sobre la base de datos`,
-    //     });
-    //   },
-    //   error:(err)=>{
-    //     this.messageService.add({
-    //       key: "grl-toast",
-    //       severity: "error",
-    //       summary: `Consulta del producto ${this.producto['nombre'].toUpperCase()} realizada SIN ÉXITO`,
-    //       detail: "::: ERROR ::: \n" + err["error"]["detail"],
-    //     });
-    //   }
-    // })
-    this.productos = [...this.productos];
-    this.isUpdated = false;
-    this.productosDialog = false;
-    this.producto = {
-      producto : '',
-      nombre : '',
-      descripcion : '',
-      precio : 0,
-      estado : true,
-      categoria : ''
-    };
-  }
-
-  openNewInv() {
-    this.product = {
-      id:0,
-      producto : '',
-      nombre : '',
-      descripcion : '',
-      precio : 0,
-      estado : true,
-      categoria : ''
-    };
-    this.submitted = false;
-    this.productDialog = true;
-  }
-
-  editProduct(product: any) {
-    this.product = { ...product };
-    this.isUpdated = true;
-    this.productDialog = true;
-  }
-
-  hideDialogInv() {
-    this.productDialog = false;
-    this.submitted = false;
-  }
-
-  /* Crear nueva bodega */
-  createProductInv(){
-    let data = {
-      id_warehouse: Number(this.product.bodega),
-      id_product: Number(this.product.id),
-      cantidad: Number(this.product.cantidad)
+      this.snacks = [...this.snacks];
+      this.snackDialog = false;
+      this.snack = proto_prod_snack;
     }
-    // this.bodegaService.createBodega(data).subscribe({
-    //   next:()=>{
-    //     this.messageService.add({
-    //       key: "grl-toast",
-    //       severity: "success",
-    //       summary: "Actualización exitosa",
-    //       detail: `La actualización del producto ${this.product['nombre'].toUpperCase()},
-    //       se realizo correctamente sobre la base de datos`,
-    //     });
-    //   },
-    //   error:(err)=>{
-    //     this.messageService.add({
-    //       key: "grl-toast",
-    //       severity: "error",
-    //       summary: `Consulta del producto ${this.product['nombre'].toUpperCase()} realizada SIN ÉXITO`,
-    //       detail: "::: ERROR ::: \n" + err["error"]["detail"],
-    //     });
-    //   }
-    // })
-    this.products = [...this.products];
-    this.productDialog = false;
-    this.product = {
-      producto : '',
-      nombre : '',
-      descripcion : '',
-      precio : 0,
-      estado : true,
-      categoria : ''
-    };
   }
 
-  /* Actualizar una bodega */
-  saveProductInv(){
-    this.submitted = true;
-    let data = {
-      id_warehouse: Number(this.product.bodega),
-      id_product: Number(this.product.id),
-      cantidad: Number(this.product.cantidad)
-    }
-    // this.bodegaService.editProductBodega(data).subscribe({
-    //   next:()=>{
-    //     this.messageService.add({
-    //       key: "grl-toast",
-    //       severity: "success",
-    //       summary: `${this.isUpdated ? 'Actualización':'Creación'}  exitosa`,
-    //       detail: `La ${this.isUpdated ? 'actualización':'creación'} del producto 
-    //       ${this.products.find(el=> el.id == data.id_any)['nombre'].toUpperCase()},
-    //       se realizo correctamente sobre la base de datos`,
-    //     });
-    //   },
-    //   error:(err)=>{
-    //     this.messageService.add({
-    //       key: "grl-toast",
-    //       severity: "error",
-    //       summary: `Consulta del producto ${this.products.find(el=> el.id == data.id_any)['nombre'].toUpperCase()} realizada SIN ÉXITO`,
-    //       detail: "::: ERROR ::: \n" + err["error"]["detail"],
-    //     });
-    //   }
-    // })
-    this.products = [...this.products];
-    this.isUpdated = false;
-    this.productDialog = false;
-    this.product = {
-      producto : '',
-      nombre : '',
-      descripcion : '',
-      precio : 0,
-      estado : true,
-      categoria : ''
-    };
-  }
-
-  findIndexById(id: string): number {
+  findIndexByIdSnack(id: number): number {
     let index = -1;
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].producto === id) {
+    for (let i = 0; i < this.snacks.length; i++) {
+      if (this.snacks[i].pk_id === id) {
         index = i;
         break;
       }
@@ -355,76 +131,109 @@ export class StockComponent {
     return index;
   }
 
-  checkWarehouse(event){
-    // this.bodegaService.getBodega(event.target.value).subscribe({
-    //   next: (response) => {
-    //     this.products = response["data"];
-    //     this.messageService.add({
-    //       key: "grl-toast",
-    //       severity: "success",
-    //       summary: "Consulta exitosa",
-    //       detail: `La consulta de la BODEGA ${event.target.value} se realizo correctamente sobre la base de datos`,
-    //     });
-    //   },
-    //   error: (err) => {
-    //     this.messageService.add({
-    //       key: "grl-toast",
-    //       severity: "error",
-    //       summary: `Consulta de la BODEGA ${event.target.value} realizada SIN ÉXITO`,
-    //       detail: "::: ERROR ::: \n" + err["error"]["detail"],
-    //     });
-    //   }
-    // });
+  getSeverity(status: number) {
+    if (status > 50) {
+      return "success";
+    } else {
+      if (status >= 10 && status <= 50) {
+        return "warning";
+      } else {
+        return "danger";
+      }
+    }
   }
 
-  createId(): string {
-    let id = "";
-    var chars =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (var i = 0; i < 5; i++) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return id;
+  openNewTicket() {
+    this.ticket = proto_prod_ticket;
+    this.submittedTicket = false;
+    this.ticketDialog = true;
   }
 
-  checkBodega(){
-    let url = ''
-    // Construir la parte de la URL correspondiente a las variables existentes
-    let urlParams = '';
-    if (this.countryString) {
-      urlParams += 'c';
-      url += `?country=${this.countryString}`;
+  deleteSelectedTickets() {
+    this.confirmationService.confirm({
+      message: "Are you sure you want to delete the selected tickets?",
+      header: "Confirm",
+      icon: "pi pi-exclamation-triangle",
+      accept: () => {
+        this.tickets = this.tickets.filter(
+          (val) => !this.selectedTickets?.includes(val)
+        );
+        this.selectedTickets = null;
+        this.messageService.add({
+          severity: "success",
+          summary: "Successful",
+          detail: "Tickets Deleted",
+          life: 3000,
+        });
+      },
+    });
+  }
+
+  editTicket(ticket: Ticket) {
+    this.ticket = { ...ticket };
+    this.ticketDialog = true;
+  }
+
+  deleteTicket(ticket: Ticket) {
+    this.confirmationService.confirm({
+      message: "Are you sure you want to delete " + ticket.t_name + "?",
+      header: "Confirm",
+      icon: "pi pi-exclamation-triangle",
+      accept: () => {
+        this.tickets = this.tickets.filter((val) => val.pk_id !== ticket.pk_id);
+        this.ticket = proto_prod_ticket;
+        this.messageService.add({
+          severity: "success",
+          summary: "Successful",
+          detail: "Ticket Deleted",
+          life: 3000,
+        });
+      },
+    });
+  }
+
+  hideDialogTicket() {
+    this.ticketDialog = false;
+    this.submittedTicket = false;
+  }
+
+  saveTicket() {
+    this.submittedTicket = true;
+
+    if (this.ticket.t_name?.trim()) {
+      if (this.ticket.pk_id) {
+        this.tickets[this.findIndexByIdTicket(this.ticket.pk_id)] = this.ticket;
+        this.messageService.add({
+          severity: "success",
+          summary: "Successful",
+          detail: "Ticket Updated",
+          life: 3000,
+        });
+      } else {
+        this.tickets.push(this.ticket);
+        this.messageService.add({
+          severity: "success",
+          summary: "Successful",
+          detail: "Ticket Created",
+          life: 3000,
+        });
+      }
+
+      this.tickets = [...this.tickets];
+      this.ticketDialog = false;
+      this.ticket = proto_prod_ticket;
     }
-    if (this.regionString) {
-      urlParams += 'r';
-      url += `${urlParams === '' ? '?' : '&'}region=${this.regionString}`;
-    }
-    if (this.warehouseString) {
-      urlParams += 'h';
-      url += `${urlParams === '' ? '?' : '&'}warehouse=${this.warehouseString}`;
+  }
+
+  findIndexByIdTicket(id: number): number {
+    let index = -1;
+    for (let i = 0; i < this.tickets.length; i++) {
+      if (this.tickets[i].pk_id === id) {
+        index = i;
+        break;
+      }
     }
 
-    // Añadir la parte de la URL correspondiente a las variables existentes
-    url = `${urlParams}/${url}`;
-        
-    // this.bodegaService.getBodegaInventory(url).subscribe({
-    //   next: (response) => {
-    //     this.products = response["data"];
-    //     this.messageService.add({
-    //       key: "grl-toast",
-    //       severity: "success",
-    //       summary: "Consulta exitosa",
-    //       detail: `La consulta de la BODEGA ${url} se realizo correctamente sobre la base de datos`,
-    //     });
-    //   },
-    //   error: (err) => {
-    //     this.messageService.add({
-    //       key: "grl-toast",
-    //       severity: "error",
-    //       summary: `Consulta de la BODEGA ${url} realizada SIN ÉXITO`,
-    //       detail: "::: ERROR ::: \n" + err["error"]["detail"],
-    //     });
-    //   }
-    // });
+    return index;
   }
 }

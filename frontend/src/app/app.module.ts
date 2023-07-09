@@ -64,6 +64,9 @@ import { SplitterModule } from 'primeng/splitter';
 import { DividerModule } from 'primeng/divider';
 import { SkeletonModule } from 'primeng/skeleton';
 import { SnacksDemo } from './pages/purchase/snacks';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CalendarModule } from 'primeng/calendar';
+import { InputSwitchModule } from 'primeng/inputswitch';
 @NgModule({
   declarations: [
     AppComponent,
@@ -111,6 +114,7 @@ import { SnacksDemo } from './pages/purchase/snacks';
     SlideMenuModule,
     MenuModule,
     ChartModule,
+    CalendarModule,
     SidebarModule,
     TableModule,
     ToolbarModule,
@@ -121,13 +125,15 @@ import { SnacksDemo } from './pages/purchase/snacks';
     RatingModule,
     DataViewModule,
     RadioButtonModule,
+    InputSwitchModule,
     SelectButtonModule,
     StepsModule,
     CheckboxModule,
     CardModule,
     SplitterModule,
     PasswordModule,
-    DividerModule
+    DividerModule,
+    InputNumberModule
   ],
   providers: [
     MessageService,
