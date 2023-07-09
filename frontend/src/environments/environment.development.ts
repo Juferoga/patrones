@@ -12,6 +12,6 @@ export const environment = {
   materia: 'PATRONES',
   proyecto: 'Sistema de información para el conglomerado de cines CINE PACHO.',
   profesor: 'Helio Ramirez',
-  api: 'http://back.juferoga.live/api/',
-  server: 'http://back.juferoga.live/',
+  api: 'https://back.juferoga.live/api/',
+  server: 'https://back.juferoga.live/',
 };
