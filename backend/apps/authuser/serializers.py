@@ -4,7 +4,8 @@ from .models import Employee, Customer
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ['n_id', 't_id', 'n_phone', 'email', 'name', 'password', 'n_salary', 'd_start_contract', 'd_end_contract', 't_rol']
+        fields = ['n_id', 't_id', 'n_phone', 'email', 'name', 'password', 'n_salary', 'd_start_contract', 'd_end_contract', 't_rol', 'password']
+        read_only_fields = ('is_active',)
         extra_kwargs = {'password': {'write_only': True}}
     
     def create(self, validated_data):
@@ -17,7 +18,8 @@ class EmployeeSerializer(serializers.ModelSerializer):
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = ['n_id', 't_id', 'n_phone', 'email', 'name', 'password', 'n_points']
+        fields = ['n_id', 't_id', 'n_phone', 'email', 'name', 'password', 'n_points', 'password']
+        read_only_fields = ('is_active',)
         extra_kwargs = {'password': {'write_only': True}}
     
     def create(self, validated_data):

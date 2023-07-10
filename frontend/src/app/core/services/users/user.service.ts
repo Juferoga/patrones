@@ -65,7 +65,7 @@ export class UserService {
       {headers: this.headers}
     )
   }
-  createUserEmp(usuario:Employee):Observable<Employee>{
+  setUserEmp(usuario:Employee):Observable<Employee>{
     var body = JSON.stringify({
       "n_id": usuario.n_id,
       "t_id": usuario.t_id ,
@@ -80,6 +80,23 @@ export class UserService {
     })
     return this.http.post<Employee>(
       environment.api + 'user/employee/create/',
+      body,
+      {headers: this.headers}
+    )
+  }
+  setUserCli(cliente: Customer):Observable<Customer>{
+    var body = JSON.stringify({
+      "n_id": cliente.n_id,
+      "t_id": cliente.t_id,
+      "n_phone":cliente.n_phone,
+      "email":cliente.email,
+      "name":cliente.name,
+      "password":cliente.password,
+      "n_points": cliente.n_points
+
+    })
+    return this.http.post<Customer>(
+      environment.api + 'user/customer/create/',
       body,
       {headers: this.headers}
     )

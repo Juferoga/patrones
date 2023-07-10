@@ -65,7 +65,7 @@
                     <input type="text" pInputText id="email" [(ngModel)]="empleado.email" required autofocus />
                     <small class="p-error" *ngIf="!empleado.email">El nombre de usuario (email) es requerido.</small>
                 </div>
-                <div class="field">
+                <div class="field" *ngIf="isEmployeeEdited">
                     <label for="password">Contraseña</label>
                     <p-password [(ngModel)]="empleado.password">
                         <ng-template pTemplate="header">

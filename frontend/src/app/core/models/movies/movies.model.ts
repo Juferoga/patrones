@@ -1,4 +1,4 @@
-export class Movies{
+export class Movie{
   pk_id : number;
   b_adult : boolean;
   t_actors : string;

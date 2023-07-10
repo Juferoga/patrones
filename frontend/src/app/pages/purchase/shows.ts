@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { TicketService } from '@services/ticket/ticket.service';
-
+import { ShowService } from '@services/show/show.service';
+import { Show } from '@models/shows/show.model';
+import { MovieService } from '@services/movies/movie.service';
 @Component({
     template: `
         <div class="stepsdemo-content">
@@ -10,7 +12,26 @@ import { TicketService } from '@services/ticket/ticket.service';
                 <ng-template pTemplate="title"> Funciones  </ng-template>
                 <ng-template pTemplate="subtitle"> Elige el horario en que desees ver la película </ng-template>
                 <ng-template pTemplate="content"> <!-- Aca va la vista -->
-                    <p>{{"Aquí irán los shows o funciones..."}}</p>
+                <table>
+                    <thead>
+                        <tr>
+                        <th>Date</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Movie ID</th>
+                        <th>Theater ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let shows of shows">
+                        <td>{{shows.d_date}}</td>
+                        <td>{{shows.d_start_time}}</td>
+                        <td>{{shows.d_end_time}}</td>
+                        <td>{{shows.fk_movie}}</td>
+                        <td>{{shows.fk_theater}}</td>
+                        </tr>
+                    </tbody>
+                </table>
                 </ng-template>
                 <!-- <ng-template pTemplate="footer">
                     <div class="grid grid-nogutter justify-content-between">
@@ -22,18 +43,23 @@ import { TicketService } from '@services/ticket/ticket.service';
         </div>
         `
 })
+
 export class ShowsDemo implements OnInit {
     constructor(
         public ticketService: TicketService, 
         private router: Router,
+        private messageService: MessageService,
+        private showService : ShowService
     ) {}
-
+    selectedMovie: any;
+    shows : Show [];
     products: any;
     productList : any[];
     productListCarrito : any[];
 
     ngOnInit() {
-        this.products = this.ticketService.ticketInformation.products;
+        this.getShow();
+        this.products = this.ticketService.ticketInformation.show;
 				let url = ''
 				// Construir la parte de la URL correspondiente a las variables existentes
 				let urlParams = '';
@@ -79,7 +105,7 @@ export class ShowsDemo implements OnInit {
     }
     
     nextPage() {
-        this.ticketService.ticketInformation.products = this.products;
+        this.ticketService.ticketInformation.show = this.shows;
         this.router.navigate(['admin/mis-compras/seat']);
     }
     
@@ -105,6 +131,30 @@ export class ShowsDemo implements OnInit {
         // )
     }
 
+    getShow(){
+        this.showService.getShow().subscribe(
+            (data) => {
+                // Filtrar shows basados en la película seleccionada
+                let selectedMovie = this.ticketService.ticketInformation.movie;
+                if (selectedMovie) {
+                    this.shows = data.filter(show => show.fk_movie == this.selectedMovie.pk_id);
+                } else {
+                    this.shows = data;
+                }
+            },
+            (err)=>{
+              this.messageService.add({
+                severity: "error",
+                summary: "Error",
+                detail: "Error en la petición",
+                life: 3000,
+              });
+            }
+        )
+        
+    }
+
+    
     eliminarCarrito(id){
 
     }

@@ -34,7 +34,7 @@ export class SnacksDemo implements OnInit {
     productListCarrito : any[];
 
     ngOnInit() {
-        this.products = this.ticketService.ticketInformation.products;
+        this.products = this.ticketService.ticketInformation.snacks;
 				let url = ''
 				// Construir la parte de la URL correspondiente a las variables existentes
 				let urlParams = '';
@@ -80,7 +80,7 @@ export class SnacksDemo implements OnInit {
     }
     
     nextPage() {
-        this.ticketService.ticketInformation.products = this.products;
+        this.ticketService.ticketInformation.snacks = this.products;
         this.router.navigate(['admin/mis-compras/payment']);
     }
     

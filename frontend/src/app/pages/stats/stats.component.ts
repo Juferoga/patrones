@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StatsService } from '@services/stats/stats.service';
 import { PurchaseStatistics } from '@models/stats/stats.model';
 import { ChartData, ChartOptions } from 'chart.js';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-stats',
@@ -9,7 +11,7 @@ import { ChartData, ChartOptions } from 'chart.js';
   styleUrls: ['./stats.component.scss']
 })
 export class StatsComponent implements OnInit {
-  constructor(private statsService:StatsService) {}
+  constructor(private statsService:StatsService, private router: Router) {}
   
   purchaseStatistics: PurchaseStatistics;
   productCountData: ChartData;
@@ -22,6 +24,10 @@ export class StatsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getStats();    
+  }
+
+  goToPDF(){
+    window.open(environment.api+'stats/report/', '_blank');
   }
 
   getStats(){

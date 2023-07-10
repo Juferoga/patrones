@@ -3,20 +3,21 @@
     <h1>Estadísticas generales</h1>
     <div style="margin-top: 50px; margin-bottom: 50px;">
       <div style="margin-top: 20px; margin-bottom: 20px;">
-        <strong>Valor total de las compras</strong><p>{{purchaseStatistics.total_purchase_value}}</p>
+        <strong>Valor total de las compras</strong><p>{{purchaseStatistics?.total_purchase_value}}</p>
       </div>
       <div style="margin-top: 20px; margin-bottom: 20px;">
-        <strong>Puntaje promedio</strong><p>{{purchaseStatistics.average_score}}</p>
+        <strong>Puntaje promedio</strong><p>{{purchaseStatistics?.average_score}}</p>
       </div>
       <div style="margin-top: 20px; margin-bottom: 20px;">
-        <strong>Precio promedio</strong><p>{{purchaseStatistics.average_price | currency}}</p>
+        <strong>Precio promedio</strong><p>{{purchaseStatistics?.average_price | currency}}</p>
       </div>
       <div style="margin-top: 20px; margin-bottom: 20px;">
-        <strong>Total de asientos reservados</strong><p>{{purchaseStatistics.total_reserved_seats}}</p>
+        <strong>Total de asientos reservados</strong><p>{{purchaseStatistics?.total_reserved_seats}}</p>
       </div>
       <div style="margin-top: 20px; margin-bottom: 20px;">
-        <strong>Duración promedio</strong><p>{{purchaseStatistics.average_duration}}</p>
+        <strong>Duración promedio</strong><p>{{purchaseStatistics?.average_duration}}</p>
       </div>
+      <p-button label="Descargar informe" icon="pi pi-download" iconPos="right" (click)="goToPDF()"></p-button>
     </div>
   </p-tabPanel>
   <p-tabPanel header="Producto Cantidad">

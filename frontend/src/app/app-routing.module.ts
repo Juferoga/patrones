@@ -119,19 +119,45 @@ const routes: Routes = [
       },
       {
         path: 'mi-inventario',
-        component: OnBuildComponent
+        component: StockComponent
       },
       {
         path: 'mis-ventas',
-        component: OnBuildComponent
+        component: SellsComponent
       },
       {
         path: 'mis-compras',
-        component: OnBuildComponent
+        component: PurchaseComponent,
+        children: [
+          {
+            path: 'movies',
+            component: MoviesDemo
+          },
+          {
+            path: 'shows',
+            component: ShowsDemo
+          },
+          {
+            path: 'seat',
+            component: SeatDemo
+          },
+          {
+            path: 'snacks',
+            component: SnacksDemo
+          },
+          {
+            path: 'payment',
+            component: PaymentDemo
+          },
+          {
+            path: 'confirmation',
+            component: ConfirmationDemo
+          }
+        ]
       },
       {
-        path: 'mis-referidos',
-        component: OnBuildComponent
+        path: 'estadisticas',
+        component: StatsComponent
       }
     ]
   },

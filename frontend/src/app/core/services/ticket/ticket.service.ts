@@ -13,7 +13,10 @@ export class TicketService {
       ciudad: "",
       direccion_entrega: ""
     },
-    products: [],
+    seats: [],
+    show : {},
+    snacks: [],
+    movie: {},
     paymentInformation: {
       cardholderName: "",
       cardholderNumber: "",

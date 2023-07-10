@@ -112,8 +112,6 @@
             <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveSnack()"></button>
         </ng-template>
       </p-dialog>
-    
-      <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
     </div>
   </p-tabPanel>
   <p-tabPanel header="Tickets">
@@ -205,7 +203,7 @@
           </ng-template>
         </p-dialog>
       
-        <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
-      </div>
-  </p-tabPanel>
+    </div>
+    </p-tabPanel>
 </p-tabView>
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

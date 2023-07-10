@@ -117,7 +117,7 @@ export class StockComponent {
     if (this.snack.t_name?.trim()) {
       if (this.snack.pk_id) {
         this.snackService.updateSnack(this.snack).subscribe(
-         (snack : Snack) => {
+          (snack : Snack) => {
            this.snacks[this.findIndexByIdSnack(snack.pk_id)] = snack;
            this.messageService.add({
              severity: "success",

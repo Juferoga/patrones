@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { Movies } from 'src/app/core/models/movies/movies.model';
+import { Movie } from 'src/app/core/models/movies/movies.model';
 import { TicketService } from '@services/ticket/ticket.service';
 import { MovieService } from '@services/movies/movie.service';
 
@@ -24,7 +24,7 @@ import { MovieService } from '@services/movies/movie.service';
                             <p-rating [(ngModel)]="item.n_rating" [readonly]="true" [cancel]="false"></p-rating>
                             
                             <ng-template pTemplate="footer">
-                                <p-button label="Elegir entradas" icon="pi pi-check"></p-button>
+                                <p-button label="Elegir entradas" icon="pi pi-check" (click)="saveMovie(item)"></p-button>
                             </ng-template>
                         </p-card>
                     </div>
@@ -47,12 +47,12 @@ export class MoviesDemo implements OnInit {
     ) {}
 
     movies: any;
-    movieList : Movies[];
+    movieList : Movie[];
 
     ngOnInit() {
-        this.movies = this.ticketService.ticketInformation.products;
+        this.movies = this.ticketService.ticketInformation.movie;
         this.movieService.getMovies().subscribe(
-            (movies: Movies[])=>{
+            (movies: Movie[])=>{
                 this.movieList = movies;
                 console.log(movies);
                 this.messageService.add({
@@ -73,8 +73,12 @@ export class MoviesDemo implements OnInit {
         )
     }
     
+    saveMovie( movie : Movie ){
+        this.ticketService.ticketInformation.movie = movie;
+        this.nextPage();
+    }
+
     nextPage() {
-        this.ticketService.ticketInformation.products = this.movies;
         this.router.navigate(['admin/mis-compras/shows']);
     }
 }

@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { Customer, Employee, User } from "src/app/core/models/users/user.model";
-import { UserService } from "src/app/core/services/users/user.service";
+import { UserService } from "@services/users/user.service";
 @Component({
   selector: "app-users",
   templateUrl: "./users.component.html",
@@ -54,6 +54,7 @@ export class UsersComponent {
   statuses!: any[];
 
   isModeEdited: boolean = false;
+  isEmployeeEdited: boolean = true;
 
   constructor(
     private userService: UserService,
@@ -96,6 +97,7 @@ export class UsersComponent {
   editEmpleado(empleado: Employee) {
     this.empleado = { ...empleado };
     this.empleadoDialog = true;
+    this.isEmployeeEdited = false ;
   }
 
   deleteEmpleado(empleado: Employee) {
@@ -121,16 +123,17 @@ export class UsersComponent {
   hideDialogEmpleado() {
     this.empleadoDialog = false;
     this.submittedEmpleado = false;
+    this.isEmployeeEdited = true;
   }
 
   saveEmpleado() {
     this.submittedEmpleado =true;
 
     if (this.empleado.name?.trim()) {
-      if (this.empleado.t_id) {
+      console.log(this.empleado)
+      if (this.empleados[this.findIndexByIdEmpleado(this.empleado.n_id)]) {
+        this.empleados[this.findIndexByIdEmpleado(this.empleado.n_id)] = this.empleado;
         console.log("si existe")
-        this.empleados[this.findIndexByIdEmpleado(this.empleado.t_id)] =
-          this.empleado;
         this.messageService.add({
           severity: "success",
           summary: "Successful",
@@ -138,9 +141,8 @@ export class UsersComponent {
           life: 3000,
         });
       } else {
-        console.log("no existe")
-        console.log(this.userService.createUserEmp(this.empleado).subscribe((data)=>{console.log(data)}))
-        this.userService.createUserEmp(this.empleado).subscribe(
+        console.log("no existe pero ya lo va a crear todo bien")
+        this.userService.setUserEmp(this.empleado).subscribe(
           (empleado:Employee) =>{
             this.empleados.push(empleado);
             this.messageService.add({
@@ -167,10 +169,10 @@ export class UsersComponent {
     }
   }
 
-  findIndexByIdEmpleado(id: string): number {
+  findIndexByIdEmpleado(id: number): number {
     let index = -1;
     for (let i = 0; i < this.empleados.length; i++) {
-      if (this.empleados[i].t_id === id) {
+      if (this.empleados[i].n_id === id) {
         index = i;
         break;
       }
@@ -239,9 +241,8 @@ export class UsersComponent {
     this.submittedCliente = true;
 
     if (this.cliente.name?.trim()) {
-      if (this.cliente.t_id) {
-        this.clientes[this.findIndexByIdEmpleado(this.cliente.t_id)] =
-          this.cliente;
+      if (this.clientes[this.findIndexByIdCliente(this.cliente.n_id)]) {
+        this.clientes[this.findIndexByIdCliente(this.cliente.n_id)] = this.cliente;
         this.messageService.add({
           severity: "success",
           summary: "Successful",
@@ -249,13 +250,26 @@ export class UsersComponent {
           life: 3000,
         });
       } else {
-        this.clientes.push(this.cliente);
-        this.messageService.add({
-          severity: "success",
-          summary: "Successful",
-          detail: "empleado Created",
-          life: 3000,
-        });
+        this.userService.setUserCli(this.cliente).subscribe(
+          (cliente : Customer) => {
+            this.clientes.push(this.cliente);
+            this.messageService.add({
+              severity: "success",
+              summary: "Successful",
+              detail: "empleado Created",
+              life: 3000,
+            });
+          },
+          (error) =>{
+            this.messageService.add({
+              severity: "error",
+              summary: "Error",
+              detail: "Customer not Created",
+              life: 3000,
+            });
+          }
+
+        )
       }
 
       this.clientes = [...this.clientes];
@@ -264,10 +278,10 @@ export class UsersComponent {
     }
   }
 
-  findIndexByIdCliente(id: string): number {
+  findIndexByIdCliente(id: number): number {
     let index = -1;
     for (let i = 0; i < this.clientes.length; i++) {
-      if (this.clientes[i].t_id === id) {
+      if (this.clientes[i].n_id === id) {
         index = i;
         break;
       }
