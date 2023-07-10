@@ -1,38 +1,33 @@
-
-.multiplex {
-  margin: 60px;
-  background: #111;
-}
-
 .theatre {
   display: flex;
-  background-color: #761818;
-  .seat{
-    background: linear-gradient(to top, #761818, #761818, #761818, #761818, #761818, #B54041,  #F3686A);
-  }
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .cinema-seats {
   display: flex;
-  margin-left: 20px;
   
   .seat {
     cursor: pointer;
     
-    &:hover {
+    &:hover:before {
       content: '';
+      position: absolute;
+      top: 0;
       width: 100%;
-      // height: 100%;
+      height: 100%;
       background: rgba(0, 0, 0, 0.5);
       border-radius: 7px;
     }
     
-    &.active {
-      background-color: #00ff00 !important;
-    }
+    &.active {}
     
     &.active:before {
       content: '';
+      position: absolute;
+      top: 0;
       width: 100%;
       height: 100%;
       background: rgba(255, 255, 255, 0.6);
@@ -54,13 +49,11 @@
     width: 35px;
     height: 50px;
     border-radius: 7px;
+    background: linear-gradient(to top, #761818, #761818, #761818, #761818, #761818, #B54041,  #F3686A);
     margin-bottom: 10px;
     transform: skew(20deg);
     margin-top: -32px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    &.active {
-      background-color: #00ff00 !important;
-    }
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5)
   }
 
   .row-2 {
@@ -129,13 +122,11 @@
     width: 35px;
     height: 50px;
     border-radius: 7px;
+    background: linear-gradient(to top, #761818, #761818, #761818, #761818, #761818, #B54041,  #F3686A);
     margin-bottom: 10px;
     transform: skew(-8deg);
     margin-top: -32px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    &.active {
-      background-color: #00ff00 !important;
-    }
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5)
   }
   
   .row-2 {
