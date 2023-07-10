@@ -4,4 +4,6 @@ export class Seat {
   b_state: boolean;
   fk_ticket: any;
   fk_theater: number;
+  row?:number;
+  column?:number;
 }

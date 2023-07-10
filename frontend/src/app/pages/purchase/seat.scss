@@ -1,13 +1,31 @@
 .theatre {
   display: flex;
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  padding: 70px;
+  justify-content: center;
+  background-color: black;
+  border-radius: 10px;
+  // position: absolute;
+  // top: 70%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  &-screen{
+    position: absolute;
+    min-width: 400px;
+    min-height: 180px;
+    background: black;
+    box-shadow: rgba(252, 233, 213, 0.56) 0px -20px 100px 30px;
+    border-radius: 3px;
+    iframe{
+      width: 100%;
+      height: 176px;
+      margin: 0px;
+    }
+  }
 }
 
 .cinema-seats {
   display: flex;
+  margin-top: 200px;
   
   .seat {
     cursor: pointer;
@@ -103,11 +121,15 @@
       transform: skew(8deg);
     }
   } 
+  
+  .row-8 {
+    transform: skew(-7deg);
+
+    .seat {
+      transform: skew(8deg);
+    }
+  }
 }
-
-
-
-
 
 // Left Seats
 .right {
@@ -170,6 +192,14 @@
   }
 
   .row-7 {
+    transform: skew(15deg);
+
+    .seat {
+      transform: skew(-20deg);
+    }
+  } 
+
+  .row-8 {
     transform: skew(15deg);
 
     .seat {

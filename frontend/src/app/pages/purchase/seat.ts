@@ -12,13 +12,39 @@ import { SeatService } from '../../core/services/seat/seat.service';
         <ng-template pTemplate="title">Asientos</ng-template>
         <ng-template pTemplate="subtitle">Elige los asientos</ng-template>
         <ng-template pTemplate="content">
-        <div class="theatre">
-          <div class="cinema-seats left">
-            <div class="cinema-row" *ngFor="let row of seatsMatrix; let rowIndex = index">
-              <div class="seat" *ngFor="let seat of row; let seatIndex = index" [class.active]="seat === 1" (click)="toggleSeat(rowIndex, seatIndex)"></div>
+          <div class="theatre">
+            <div class="theatre-screen">
+              <iframe src="https://www.youtube.com/embed/WPA71Wn0L0o?controls=0?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="cinema-seats left">
+              <ng-container *ngFor="let row of seatRows; let i = index">
+                <div *ngIf="i < seatRows.length / 2" class="cinema-row row-{{i+1}}">
+                  <div *ngFor="let seat of row" class="seat" (click)="toggleSeat(seat)" [class.active]="seatsSelected.includes(seat)"></div>
+                </div>
+              </ng-container>
+            </div>
+            <div class="cinema-seats right">
+              <ng-container *ngFor="let row of seatRows; let i = index">
+                <div *ngIf="i >= seatRows.length / 2" class="cinema-row row-{{i+1}}">
+                  <div *ngFor="let seat of row" class="seat" (click)="toggleSeat(seat)" [class.active]="seatsSelected.includes(seat)"></div>
+                </div>
+              </ng-container>
             </div>
           </div>
-        </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Silla</th>
+                <th>Precio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of seatsSelected">
+                <td>{{item.pk_id}}</td>
+                <td>{{item.t_type}}</td>
+              </tr>
+            </tbody>
+          </table>
         </ng-template>
         <ng-template pTemplate="footer">
           <div class="grid grid-nogutter justify-content-between">
@@ -41,30 +67,38 @@ import { SeatService } from '../../core/services/seat/seat.service';
   styleUrls: ["./seat.scss"],
 })
 export class SeatDemo implements OnInit {
-  seatsSelected: Seat[];
-  seats: Seat[];
-  seatsMatrix: number[][] = [];
+  seatsSelected: Seat[] = [];
+  seats: Seat[] = [];
+  rowSize = 7; // Se determina el número de asientos por fila
+  seatRows: any[] = [];
 
   constructor(
     public ticketService: TicketService,
     private router: Router,
     private seatService: SeatService,
     private messageService: MessageService
-  ) {
-    // Generar la matriz de asientos, en este ejemplo se generan 30 sillas con 5 filas
-    const numRows = 5;
-    const numSeatsPerRow = 7;
-    for (let i = 0; i < numRows; i++) {
-      this.seatsMatrix[i] = Array(numSeatsPerRow).fill(0);
+  ) {}
+
+  ngOnInit() {
+    this.seatService.getSeats().subscribe((seats: Seat[]) => {
+      this.seats = seats;
+      this.createSeatRows();
+    });
+  }
+
+  createSeatRows() {
+    for(let i=0; i<this.seats.length; i+=this.rowSize) {
+      this.seatRows.push(this.seats.slice(i, i+this.rowSize));
     }
   }
 
-  ngOnInit() {
-    this.seatService.getSeats().subscribe(
-      (seats : Seat[]) =>{
-        this.seats = seats;
-      }
-    )
+  toggleSeat(seat: Seat) {
+    const index = this.seatsSelected.indexOf(seat);
+    if(index > -1) {
+      this.seatsSelected.splice(index, 1);
+    } else {
+      this.seatsSelected.push(seat);
+    }
   }
 
   nextPage() {
@@ -77,7 +111,4 @@ export class SeatDemo implements OnInit {
     this.router.navigate(["admin/mis-compras/shows"]);
   }
 
-  toggleSeat(rowIndex: number, seatIndex: number) {
-    this.seatsMatrix[rowIndex][seatIndex] = this.seatsMatrix[rowIndex][seatIndex] === 1 ? 0 : 1;
-  }
 }
