@@ -333,6 +333,34 @@ En la siguiente sección podrás ver los diagramas necesarios para el desarrollo
 
   ![Diagrama de despliegue](/patrones/assets/images/pages/planeacion/DiagramaDespliegue.svg "Diagrama de despliegue")
 
+### Diagrama de actividades
+
+---
+
+#### Crear boleta
+
+  ![Diagrama de actividades](/patrones/assets/images/pages/planeacion/act_01_.svg "Diagrama de actividades")
+
+#### Crear reporte
+
+  ![Diagrama de actividades](/patrones/assets/images/pages/planeacion/act_02_reporte.svg "Diagrama de actividades")
+
+#### Gestión usuario
+
+  ![Diagrama de actividades](/patrones/assets/images/pages/planeacion/act_03_usuarios.svg "Diagrama de actividades")
+
+#### Gestión snacks
+
+  ![Diagrama de actividades](/patrones/assets/images/pages/planeacion/act_05_snacks.svg "Diagrama de actividades")
+
+#### Gestión películas
+
+  ![Diagrama de actividades](/patrones/assets/images/pages/planeacion/act_04_peliculas.svg "Diagrama de actividades")
+
+#### Gestión shows
+
+  ![Diagrama de actividades](/patrones/assets/images/pages/planeacion/act_06_shows.svg "Diagrama de actividades")
+
 ### Diagrama paquetes
 
 ---
