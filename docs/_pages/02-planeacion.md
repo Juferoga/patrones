@@ -226,6 +226,12 @@ En la siguiente sección podrás ver los diagramas necesarios para el desarrollo
 
 ![Diagrama de contexto](/patrones/assets/images/pages/planeacion/DiagramaContexto.svg "Diagrama de Contexto")
 
+### Diagrama de objetos
+
+---
+
+![Diagrama de objetos](/patrones/assets/images/pages/planeacion/DiagramaObjetos.svg "Diagrama de objetos")
+
 ### Diagrama de Gantt
 
 ---
@@ -238,6 +244,58 @@ En la siguiente sección podrás ver los diagramas necesarios para el desarrollo
 ---
 
 ![Diagrama de casos de uso](/patrones/assets/images/pages/planeacion/DiagramaCU.svg "Diagrama de casos de uso")
+
+### Diagrama de secuencias
+
+---
+
+#### Iniciar sesión
+
+![Diagrama de secuencias](/patrones/assets/images/pages/planeacion/sec_02_iniciar_sesion.svg "Diagrama de secuencias")
+
+#### Cerrar sesión
+
+![Diagrama de secuencias](/patrones/assets/images/pages/planeacion/sec_01_cerrar_sesion.svg "Diagrama de secuencias")
+
+#### Registro usuario
+
+![Diagrama de secuencias](/patrones/assets/images/pages/planeacion/sec_03_registro_usuario.svg "Diagrama de secuencias")
+
+#### Disponibilidad y disposición de sillas
+
+![Diagrama de secuencias](/patrones/assets/images/pages/planeacion/sec_04_dispo_sillas.svg "Diagrama de secuencias")
+
+#### Comprar boleta
+
+![Diagrama de secuencias](/patrones/assets/images/pages/planeacion/sec_05_comprar_boleto.svg "Diagrama de secuencias")
+
+#### Comprar snack
+
+![Diagrama de secuencias](/patrones/assets/images/pages/planeacion/sec_06_comprar_snack.svg "Diagrama de secuencias")
+
+#### Evaluar servicio
+
+![Diagrama de secuencias](/patrones/assets/images/pages/planeacion/sec_07_evaluar.svg "Diagrama de secuencias")
+
+#### Generar reportes
+
+![Diagrama de secuencias](/patrones/assets/images/pages/planeacion/sec_08_reportes.svg "Diagrama de secuencias")
+
+#### Gestionar Base de datos
+
+![Diagrama de secuencias](/patrones/assets/images/pages/planeacion/sec_09_gest_bd.svg "Diagrama de secuencias")
+
+#### Gestionar cargos
+
+![Diagrama de secuencias](/patrones/assets/images/pages/planeacion/sec_10_cargos.svg "Diagrama de secuencias")
+
+#### Redimir puntos
+
+![Diagrama de secuencias](/patrones/assets/images/pages/planeacion/sec_11_red_puntos.svg "Diagrama de secuencias")
+
+#### Realizar pago
+
+![Diagrama de secuencias](/patrones/assets/images/pages/planeacion/sec_12_pago.svg "Diagrama de secuencias")
 
 ### Diagrama de arquitectura
 
@@ -256,6 +314,18 @@ En la siguiente sección podrás ver los diagramas necesarios para el desarrollo
 ---
 
   ![Diagrama relacional](/patrones/assets/images/pages/planeacion/DiagramaRelacional.svg "Diagrama relacional")
+
+### Diagrama de clases
+
+---
+
+  ![Diagrama de clases](/patrones/assets/images/pages/planeacion/DiagramaClases.svg "Diagrama de clases")
+
+### Diagrama de componentes
+
+---
+
+  ![Diagrama de componentes](/patrones/assets/images/pages/planeacion/DiagramaComponentes.svg "Diagrama de componentes")
 
 ### Diagrama de despliegue
 
