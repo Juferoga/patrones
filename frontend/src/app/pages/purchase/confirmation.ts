@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Messages } from 'primeng/messages';
 import { TicketService } from '@services/ticket/ticket.service';
+import { Snack } from '@models/products/products.model';
+
 
 @Component({
     template: `
@@ -12,38 +14,59 @@ import { TicketService } from '@services/ticket/ticket.service';
                 <ng-template pTemplate="subtitle"> Confirma tu compra </ng-template>
                 <ng-template pTemplate="content">
                     <div class="field col-12">
-                        <label for="class">Region</label>
-                        <b>{{ ticketInformation.personalInformation.region }}</b>
+                        <label for="class">Película : </label>
+                        <b>{{ ticketInformation.movie.t_title }}</b>
                     </div>
                     <div class="field col-12">
-                        <label for="class">País</label>
-                        <b>{{ ticketInformation.personalInformation.pais }}</b>
+                        <label for="class">Función : </label>
+                        <b>{{ ticketInformation.show.d_date | date }} | {{ ticketInformation.show.d_start_date | date: "hh:mm a" }} - {{ ticketInformation.show.d_end_date | date: "hh:mm a" }}</b>
                     </div>
                     <div class="field col-12">
-                        <label for="class">Ciudad</label>
-                        <b>{{ ticketInformation.personalInformation.ciudad }}</b>
+                        <label for="class">Asientos : </label>
+                        <ul>
+                            <li *ngFor="let seat of ticketInformation.seats">{{seat.pk_id}} | {{seat.t_type}}</li>
+                        </ul>
                     </div>
-                    <div class="field col-12">
-                        <label for="class">Dirección de entrega</label>
-                        <b>{{ ticketInformation.personalInformation.direccion_entrega }}</b>
+                        <div class="field col-12">
+                        <label for="class">Snacks</label>
+                        <p-table [value]="ticketInformation.snacks" [tableStyle]="{'min-width': '50rem'}">
+                        <ng-template pTemplate="header">
+                        <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Tipo</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-snack>
+                        <tr>
+                        <td>{{snack.pk_id}}</td>
+                        <td>{{snack.t_name}}</td>
+                        <td>{{snack.t_description}}</td>
+                        <td>{{snack.n_price}}</td>
+                        <td>{{snack.t_type}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
                     </div>
                     <div class="field col-12">
                         
                     </div>
                     <div class="field col-12">
-                        <label for="Age">Cardholder Name</label>
+                        <label for="Age">Cardholder Name : </label>
                         <b>{{ ticketInformation.paymentInformation.cardholderName ? ticketInformation.paymentInformation.cardholderName : '-' }}</b>
                     </div>
                     <div class="field col-12">
-                        <label for="Age">Card Number</label>
+                        <label for="Age">Card Number : </label>
                         <b>{{ ticketInformation.paymentInformation.cardholderNumber ? ticketInformation.paymentInformation.cardholderNumber : '-' }}</b>
                     </div>
                     <div class="field col-12">
-                        <label for="Age">Date</label>
+                        <label for="Age">Date : </label>
                         <b>{{ ticketInformation.paymentInformation.date ? ticketInformation.paymentInformation.date : '-' }}</b>
                     </div>
                     <div class="field col-12">
-                        <label for="Age">CVV</label>
+                        <label for="Age">CVV : </label>
                         <b>{{ ticketInformation.paymentInformation.cvv && ticketInformation.paymentInformation.cvv.length === 3 ? '**' + ticketInformation.paymentInformation.cvv[2] : '-' }}</b>
                     </div>
                 </ng-template>
@@ -58,7 +81,7 @@ import { TicketService } from '@services/ticket/ticket.service';
         
         <p-dialog header="Califica tu experiencia" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
             <p class="m-0">
-                Tú experiencia es muy importante para nosotros, selecciona qu e tan contento estas con el maneo del tramite!!!
+                Tú experiencia es muy importante para nosotros, selecciona que tan contento estas con la atención!!!
             </p>
 
             <p-rating [(ngModel)]="cal.calificacion" [stars]="5" [cancel]="false">

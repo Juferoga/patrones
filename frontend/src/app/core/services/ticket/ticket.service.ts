@@ -1,22 +1,37 @@
 import { Injectable } from '@angular/core';
+import { Movie } from '@models/movies/movies.model';
+import { Snack } from '@models/products/products.model';
+import { Seat } from '@models/seats/seat.model';
+import { Show } from '@models/shows/show.model';
 import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
+class Booking {
+  seats: Seat[];
+  show: Show;
+  snacks: Snack[];
+  movie: Movie;
+  paymentInformation: {
+    cardholderName: string;
+    cardholderNumber: string;
+    date: string;
+    cvv: string;
+    remember: boolean;
+  };
+
+  constructor() {}
+}
+
 export class TicketService {
 
-  ticketInformation = {
-    personalInformation: {
-      region: "",
-      pais: "",
-      ciudad: "",
-      direccion_entrega: ""
-    },
+  ticketInformation : Booking = {
     seats: [],
-    show : {},
+    show : null,
     snacks: [],
-    movie: {},
+    movie: null,
     paymentInformation: {
       cardholderName: "",
       cardholderNumber: "",
@@ -39,7 +54,8 @@ export class TicketService {
   }
 
   complete():boolean {
-    this.paymentComplete.next(this.ticketInformation.personalInformation);
+    this.paymentComplete.next(this.ticketInformation);
+    console.log(this.ticketInformation);
     return true;
   }
 }

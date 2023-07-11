@@ -133,7 +133,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     SplitterModule,
     PasswordModule,
     DividerModule,
-    InputNumberModule
+    InputNumberModule,
   ],
   providers: [
     MessageService,

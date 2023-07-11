@@ -13,20 +13,20 @@ import { SeatService } from '../../core/services/seat/seat.service';
         <ng-template pTemplate="subtitle">Elige los asientos</ng-template>
         <ng-template pTemplate="content">
           <div class="theatre">
-            <div class="theatre-screen">
+            <!-- <div class="theatre-screen">
               <iframe src="https://www.youtube.com/embed/WPA71Wn0L0o?controls=0?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
+            </div> -->
             <div class="cinema-seats left">
               <ng-container *ngFor="let row of seatRows; let i = index">
                 <div *ngIf="i < seatRows.length / 2" class="cinema-row row-{{i+1}}">
-                  <div *ngFor="let seat of row" class="seat" (click)="toggleSeat(seat)" [class.active]="seatsSelected.includes(seat)"></div>
+                  <div *ngFor="let seat of row" class="seat" (click)="toggleSeat(seat)" [class.active]="ticketService.ticketInformation.seats.includes(seat)"></div>
                 </div>
               </ng-container>
             </div>
             <div class="cinema-seats right">
               <ng-container *ngFor="let row of seatRows; let i = index">
                 <div *ngIf="i >= seatRows.length / 2" class="cinema-row row-{{i+1}}">
-                  <div *ngFor="let seat of row" class="seat" (click)="toggleSeat(seat)" [class.active]="seatsSelected.includes(seat)"></div>
+                  <div *ngFor="let seat of row" class="seat" (click)="toggleSeat(seat)" [class.active]="ticketService.ticketInformation.seats.includes(seat)"></div>
                 </div>
               </ng-container>
             </div>
@@ -39,7 +39,7 @@ import { SeatService } from '../../core/services/seat/seat.service';
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of seatsSelected">
+              <tr *ngFor="let item of ticketService.ticketInformation.seats">
                 <td>{{item.pk_id}}</td>
                 <td>{{item.t_type}}</td>
               </tr>
@@ -67,7 +67,6 @@ import { SeatService } from '../../core/services/seat/seat.service';
   styleUrls: ["./seat.scss"],
 })
 export class SeatDemo implements OnInit {
-  seatsSelected: Seat[] = [];
   seats: Seat[] = [];
   rowSize = 7; // Se determina el número de asientos por fila
   seatRows: any[] = [];
@@ -93,16 +92,15 @@ export class SeatDemo implements OnInit {
   }
 
   toggleSeat(seat: Seat) {
-    const index = this.seatsSelected.indexOf(seat);
+    const index = this.ticketService.ticketInformation.seats.indexOf(seat);
     if(index > -1) {
-      this.seatsSelected.splice(index, 1);
+      this.ticketService.ticketInformation.seats.splice(index, 1);
     } else {
-      this.seatsSelected.push(seat);
+      this.ticketService.ticketInformation.seats.push(seat);
     }
   }
 
   nextPage() {
-    this.ticketService.ticketInformation.seats = this.seatsSelected;
     this.router.navigate(["admin/mis-compras/snacks"]);
   }
 
