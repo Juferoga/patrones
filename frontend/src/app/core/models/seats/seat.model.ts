@@ -3,7 +3,7 @@ export class Seat {
   t_type: string;
   b_state: boolean;
   fk_ticket: any;
-  fk_theater: number;
+  fk_hall: number;
   row?:number;
   column?:number;
 }

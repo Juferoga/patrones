@@ -80,6 +80,10 @@ export class PurchaseComponent {
         routerLink: "shows",
       },
       {
+        label: "Salas",
+        routerLink: "halls",
+      },
+      {
         label: "Asientos",
         routerLink: "seat",
       },

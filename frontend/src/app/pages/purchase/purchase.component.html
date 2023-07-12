@@ -4,7 +4,9 @@
       <p-toast></p-toast>
       <p-steps [model]="items" [readonly]="false"></p-steps>
     </div>
-    <router-outlet></router-outlet>
+    <div style="margin-top: 30px;">
+      <router-outlet></router-outlet>
+    </div>
   </p-tabPanel>
   <p-tabPanel header="Histórico"> 
       <ng-template pTemplate>

@@ -23,6 +23,8 @@ import { ConfirmationDemo } from './pages/purchase/confirmation';
 import { MoviesDemo } from './pages/purchase/movies';
 import { ShowsDemo } from './pages/purchase/shows';
 import { SnacksDemo } from './pages/purchase/snacks';
+import { CinemaComponent } from '@pages/cinema/cinema.component';
+import { HallDemo } from '@pages/purchase/hall';
 
 const routes: Routes = [
   {
@@ -70,6 +72,10 @@ const routes: Routes = [
         component: SellsComponent
       },
       {
+        path: 'mi-cine',
+        component: CinemaComponent
+      },
+      {
         path: 'mis-compras',
         component: PurchaseComponent,
         children: [
@@ -80,6 +86,10 @@ const routes: Routes = [
           {
             path: 'shows',
             component: ShowsDemo
+          },
+          {
+            path: 'halls',
+            component: HallDemo
           },
           {
             path: 'seat',
@@ -124,6 +134,10 @@ const routes: Routes = [
       {
         path: 'mis-ventas',
         component: SellsComponent
+      },
+      {
+        path: 'mi-cine',
+        component: CinemaComponent
       },
       {
         path: 'mis-compras',

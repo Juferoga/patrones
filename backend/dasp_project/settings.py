@@ -38,6 +38,7 @@ PROJECT_APPS = [
     'apps.cinema',
     'apps.seat',
     'apps.stats',
+    'apps.hall',
 ]
 
 INSTALLED_APPS = SYSTEM_APPS + LIBRARY_APPS + PROJECT_APPS

@@ -67,6 +67,9 @@ import { SnacksDemo } from './pages/purchase/snacks';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { CinemaComponent } from './pages/cinema/cinema.component';
+import { CinemaDetailsComponent } from '@shared/cinema-details/cinema-details.component';
+import { HallDemo } from '@pages/purchase/hall';
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,7 +96,10 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     MoviesDemo,
     ShowsDemo,
     SnacksDemo,
-    ConfirmationDemo
+    HallDemo,
+    ConfirmationDemo,
+    CinemaComponent,
+    CinemaDetailsComponent
   ],
   imports: [
     SkeletonModule,

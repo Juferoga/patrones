@@ -11,5 +11,6 @@ urlpatterns = [
   path('cinema/', include('apps.cinema.urls')),
   path('seat/', include('apps.seat.urls')),
   path('stats/', include('apps.stats.urls')),
+  path('hall/', include('apps.hall.urls')),
   path('auth/generate_token/',views.CustomAuthToken.as_view())
 ]

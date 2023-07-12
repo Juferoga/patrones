@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { ConfirmationService, MessageService } from "primeng/api";
-import { Customer, Employee, User } from "src/app/core/models/users/user.model";
+import { Customer, Employee, User, proto_customer, proto_employee } from "src/app/core/models/users/user.model";
 import { UserService } from "@services/users/user.service";
 @Component({
   selector: "app-users",
@@ -10,41 +10,11 @@ import { UserService } from "@services/users/user.service";
 })
 export class UsersComponent {
   empleado : Employee;
-  new_empleado: Employee = {
-    "n_id": 0,
-    "t_id": "",
-    "n_phone": 0,
-    "email": "",
-    "name": "",
-    "is_active": false,
-    "is_superuser": false,
-    "is_staff": false,
-    "last_login": false,
-    "password": "",
-    "n_salary": 0,
-    "d_start_contract": new Date("2023-07-08T00:00:00.000Z"),
-    "d_end_contract": new Date("2023-07-08T00:00:00.000Z"),
-    "t_rol": 0,
-    "fk_cinema": 0
-  };
   empleados: Employee[];
   selectedEmpleados: Employee[];
   empleadoDialog: boolean;
 
   cliente: Customer;
-  new_cliente: Customer = {
-    "n_id": 0,
-    "t_id": "",
-    "n_phone": 0,
-    "email": "",
-    "name": "",
-    "is_active": false,
-    "is_superuser": false,
-    "is_staff": false,
-    "last_login": false,
-    "password": "",
-    "n_points": 0
-  };
   clientes: Customer[];
   selectedClientes: Customer[];
   clienteDialog: boolean;
@@ -69,7 +39,7 @@ export class UsersComponent {
   }
 
   openNewEmpleado() {
-    this.empleado = this.new_empleado;
+    this.empleado = proto_employee;
     this.submittedEmpleado = false;
     this.empleadoDialog = true;
   }
@@ -182,7 +152,7 @@ export class UsersComponent {
   }
 
   openNewCliente() {
-    this.cliente = null;
+    this.cliente = proto_customer;
     this.submittedCliente = false;
     this.clienteDialog = true;
   }

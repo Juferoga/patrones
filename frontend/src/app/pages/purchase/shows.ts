@@ -13,7 +13,7 @@ import { MovieService } from '@services/movies/movie.service';
                 <ng-template pTemplate="subtitle"> Elige el horario en que desees ver la película </ng-template>
                 <ng-template pTemplate="content">
                 <div class="card">
-                    <p-table [value]="shows" [(selection)]="show" dataKey="code" [tableStyle]="{'min-width': '50rem'}">
+                    <p-table [value]="shows" [(selection)]="show" [tableStyle]="{'min-width': '50rem'}">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th style="width: 4rem"></th>
@@ -70,7 +70,7 @@ export class ShowsDemo implements OnInit {
     
     nextPage() {
         this.ticketService.ticketInformation.show = this.show;
-        this.router.navigate(['admin/mis-compras/seat']);
+        this.router.navigate(['admin/mis-compras/halls']);
     }
     
     agregarCarrito(id,product){
@@ -83,7 +83,7 @@ export class ShowsDemo implements OnInit {
     }
 
     getShow(){
-        this.showService.getShow().subscribe(
+        this.showService.getShows().subscribe(
             (data) => {
                 // Filtrar shows basados en la película seleccionada
                 let selectedMovie = this.ticketService.ticketInformation.movie;

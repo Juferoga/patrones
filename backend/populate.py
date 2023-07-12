@@ -17,45 +17,46 @@ from apps.purchase.models import Purchase
 from apps.theater.models import Theater
 from apps.function.models import Function
 from apps.seat.models import Seat
+from apps.hall.models import Hall
 from django.db import IntegrityError
 
 
 def create_users_c(n=1, role=RoleChoices.CLIENT):
     fake = Faker()
-    users = []
     for _ in range(n):
         try:
-            user = User.objects.create(
+            Customer.objects.create(
                 n_id=fake.unique.random_number(),
                 t_id=random.choice([choice[0] for choice in TypeIdentificationChoices.choices]),
                 n_phone=fake.unique.random_number(digits=10),
+                n_points=0,
                 t_rol=role,
                 email=fake.unique.email(),
                 name=fake.name(),
             )
-            users.append(user)
-        except django.db.utils.IntegrityError:
+        except IntegrityError:
             print("A user with this email already exists. Skipping.")
-    return users
 
 
 def create_users_e(n=1, role=RoleChoices.CLIENT):
     fake = Faker()
-    users = []
+    cinemas = list(Cinema.objects.all())
     for _ in range(n):
         try:
-            user = User.objects.create(
-                n_id=fake.unique.random_number(),
-                t_id=random.choice([choice[0] for choice in TypeIdentificationChoices.choices]),
-                n_phone=fake.unique.random_number(digits=10),
-                t_rol=role,
-                email=fake.unique.email(),
+            Employee.objects.create(
+                n_id = fake.random_int(min=1000000, max=2000000),
+                t_id = random.choice([choice[0] for choice in TypeIdentificationChoices.choices]),
+                n_phone = fake.random_int(min=3000000000, max=4000000000),
+                email = fake.unique.email(),
+                t_rol = random.choice([1,2]),
+                n_salary=fake.random_int(min=1000000, max=2000000),
+                d_start_contract=timezone.now(),
+                d_end_contract=timezone.now(),
+                fk_cinema=random.choice(cinemas),
                 name=fake.name(),
             )
-            users.append(user)
-        except django.db.utils.IntegrityError:
+        except IntegrityError:
             print("A user with this email already exists. Skipping.")
-    return users
 
 
 
@@ -76,18 +77,25 @@ def create_cinemas(n=5):
     return cinemas
 
 
-def create_employees(users, cinemas):
+def create_employees(users):
     fake = Faker()
+    cinemas = list(Cinema.objects.all())
     for user in users:
         Employee.objects.create(
-            user_ptr_id=user.id,
+            n_id = fake.random_int(min=1000000, max=2000000),
+            t_id = random.choice([choice[0] for choice in TypeIdentificationChoices.choices]),
+            n_phone = fake.random_int(min=3000000000, max=4000000000),
+            t_role = random.choice([1,2]),
+            email = fake.unique.email(),
             n_salary=fake.random_int(min=1000000, max=2000000),
             d_start_contract=timezone.now(),
+            d_end_contract=timezone.now(),
             fk_cinema=random.choice(cinemas),
         )
 
 
-def create_theaters(n=5, cinemas=None):
+def create_theaters(n=5):
+    cinemas = list(Cinema.objects.all())
     if cinemas is None:
         raise ValueError("Please provide a list of Cinemas")
     fake = Faker()
@@ -132,21 +140,31 @@ def create_purchases(n=5):
         )
         purchase.fk_product.set(random.choices(products, k=random.randint(1, len(products))))
 
+def create_halls(n=5):
+    fake = Faker()
+    teatro = list(Theater.objects.all())
+    for _ in range(n):
+        Hall.objects.create(
+            b_state=random.choice([True, False]),
+            fk_theater=random.choice(teatro),
+        )
 
 def create_seats(n=5):
     fake = Faker()
-    theaters = list(Theater.objects.all())
+    halls = list(Hall.objects.all())
+    ticket = list(Ticket.objects.all())
     for _ in range(n):
         Seat.objects.create(
             t_type=fake.random_element(elements=('VIP', 'Normal', 'Economy')),
             b_state=random.choice([True, False]),
-            fk_theater=random.choice(theaters),
+            fk_hall=random.choice(halls),
+            fk_ticket=random.choice(ticket),
         )
 
 def create_functions(n=10):
     fake = Faker()
     movies = list(Movies.objects.all())
-    theaters = list(Theater.objects.all())
+    halls = list(Hall.objects.all())
     for _ in range(n):
         start_time = fake.time_object()
         start_datetime = datetime.combine(date.today(), start_time)
@@ -158,7 +176,7 @@ def create_functions(n=10):
             d_start_time=timezone.now(),
             d_end_time=timezone.now(),
             fk_movie=random.choice(movies),
-            fk_theater=random.choice(theaters),
+            fk_hall=random.choice(halls),
         )
 
 def create_snacks(n=5):
@@ -185,22 +203,19 @@ def create_tickets(n=5):
 
 
 def populate_db():
-    # customer_users = create_users_c(n=1, role=RoleChoices.CLIENT)
-    # create_customers(customer_users)
+    # create_users_c(n=10, role=RoleChoices.CLIENT)
+    # create_cinemas(n=5)
 
-
-    # employee_users = create_users_e(n=1, role=RoleChoices.EMPLOYEE)
-    # create_employees(employee_users, cinemas)
-
-    cinemas = create_cinemas(n=5)
-    create_theaters(n=10, cinemas=cinemas)
-    create_movies(n=10)
-    create_products(n=10)
-    create_purchases(n=10)
-    create_seats(n=10)
-    create_snacks(n=10)
-    create_tickets(n=10)
-    create_functions(n=10)
+    # create_users_e(n=10, role=RoleChoices.EMPLOYEE)
+    # create_theaters(n=5)
+    # create_movies(n=10)
+    # create_products(n=10)
+    # create_purchases(n=10)
+    create_halls(n=1000)
+    # create_tickets(n=10)
+    # create_seats(n=100)
+    # create_snacks(n=10)
+    # create_functions(n=50)
 
 
 if __name__ == "__main__":

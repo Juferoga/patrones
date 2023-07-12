@@ -11,6 +11,10 @@
     <button pButton pRipple type="button" icon="pi pi-users" class="p-button-secondary p-button-rounded p-button-text"></button>
     <p>Gestión usuario</p>
   </div>
+  <div *ngIf="isAllowed('mi-cine')" routerLinkActive="container-active" [routerLink]="href+'/mi-cine'">
+    <button pButton pRipple type="button" icon="pi pi-chart-pie" class="p-button-secondary p-button-rounded p-button-text"></button>
+    <p>Mi Cinema</p>
+  </div>
   <div *ngIf="isAllowed('mi-inventario')" routerLinkActive="container-active" [routerLink]="href+'/mi-inventario'">
     <button pButton pRipple type="button" icon="pi pi-box" class="p-button-secondary p-button-rounded p-button-text"></button>
     <p>Mi inventario</p>

@@ -42,6 +42,7 @@ import { SeatService } from '../../core/services/seat/seat.service';
               <tr *ngFor="let item of ticketService.ticketInformation.seats">
                 <td>{{item.pk_id}}</td>
                 <td>{{item.t_type}}</td>
+                <td>{{item.fk_hall}}</td>
               </tr>
             </tbody>
           </table>
@@ -79,10 +80,7 @@ export class SeatDemo implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.seatService.getSeats().subscribe((seats: Seat[]) => {
-      this.seats = seats;
-      this.createSeatRows();
-    });
+    this.getSeats();
   }
 
   createSeatRows() {
@@ -100,13 +98,42 @@ export class SeatDemo implements OnInit {
     }
   }
 
+
+  getSeats(){
+    // Solicitar la lista de asientos desde el servicio.
+    this.seatService.getSeats().subscribe(
+      (data) => {
+          // Filtrar asientos basados en la sala seleccionada
+          let selectedHall = this.ticketService.ticketInformation.hall;
+          if (selectedHall) {
+              this.seats = data.filter(seat => seat.fk_hall == this.ticketService.ticketInformation.hall.pk_id);
+              this.createSeatRows();
+          } else {
+              this.seats = data;
+              this.createSeatRows();
+          }
+      },
+      (err)=>{
+        // En caso de un error al obtener los asientos, muestra un mensaje de error.
+        this.messageService.add({
+          severity: "error",
+          summary: "Error",
+          detail: "Error en la petición",
+          life: 3000,
+        });
+      }
+    )
+  }
+
+
+
   nextPage() {
     this.router.navigate(["admin/mis-compras/snacks"]);
   }
 
   prevPage() {
     this.ticketService.ticketInformation.seats = [];
-    this.router.navigate(["admin/mis-compras/shows"]);
+    this.router.navigate(["admin/mis-compras/halls"]);
   }
 
 }

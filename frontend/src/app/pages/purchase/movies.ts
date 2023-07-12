@@ -14,12 +14,10 @@ import { MovieService } from '@services/movies/movie.service';
                 <ng-template pTemplate="subtitle"> Elige la película que deseas ver </ng-template>
                 <ng-template pTemplate="content"> <!-- Aca va la vista -->
                     <div id="contenedor-cards">
-                        <p-card *ngFor="let item of movieList" [header]="item.t_title" [subheader]="item.t_overview" [style]="{ width: '260px' }">
+                        <p-card *ngFor="let item of movieList" [header]="item.t_title" [subheader]="item.t_description" [style]="{ width: '260px' }">
                             <ng-template pTemplate="header">
                                 <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
                             </ng-template>
-                            <p>{{item.t_actors}}</p>
-                            <p>{{item.b_adult?'+18':'E'}}</p>
                             
                             <p-rating [(ngModel)]="item.n_rating" [readonly]="true" [cancel]="false"></p-rating>
                             

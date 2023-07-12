@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Hall } from '@models/hall/hall.model';
 import { Movie } from '@models/movies/movies.model';
 import { Snack } from '@models/products/products.model';
 import { Seat } from '@models/seats/seat.model';
 import { Show } from '@models/shows/show.model';
 import { Subject } from 'rxjs';
+import { BookingAdapter, Purchase } from '../../models/purchase/purchase.model';
+import { PurchaseService } from '../purchase/purchase.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +15,7 @@ import { Subject } from 'rxjs';
 class Booking {
   seats: Seat[];
   show: Show;
+  hall:Hall;
   snacks: Snack[];
   movie: Movie;
   paymentInformation: {
@@ -27,9 +31,12 @@ class Booking {
 
 export class TicketService {
 
+  constructor(){}
+
   ticketInformation : Booking = {
     seats: [],
     show : null,
+    hall : null,
     snacks: [],
     movie: null,
     paymentInformation: {

@@ -24,7 +24,7 @@ export class SideBarComponent{
     if(this.role == 'Administrador' || this.role == 'Administrador Administrador'){
       return true
     }else{
-      if(this.role == 'Empleado' && (route == 'mi-perfil' || route == 'mi-inventario' || route == 'mis-compras')){
+      if(this.role == 'Empleado' && (route == 'mi-perfil' || route == 'mi-inventario' || route == 'mis-compras' || route == 'mi-cine')){
         return true
       }else{
         if(this.role == 'Cliente' && (route == 'mi-perfil' || route == 'mis-compras')){
