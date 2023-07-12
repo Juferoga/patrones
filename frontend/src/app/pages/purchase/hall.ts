@@ -82,6 +82,7 @@ export class HallDemo implements OnInit {
     }
 
     getShow(){
+        this.ticketService.ticketInformation.hall = null;
         this.hallService.getHalls().subscribe(
             (data) => {
                 // Filtrar shows basados en la película seleccionada

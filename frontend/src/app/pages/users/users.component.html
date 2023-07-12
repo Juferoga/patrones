@@ -45,7 +45,8 @@
                         <td>{{ empleado.email }}</td>
                         <td>{{ empleado.n_phone }}</td>
                         <td>{{ empleado.t_rol }}</td>
-                        <td>{{ empleado.is_active}}</td>
+                        <td>
+                            <p-tag [value]="empleado.is_active?'Activo':'Inactivo'" [severity]="empleado.is_active?'success':'error'"></p-tag>
                         <td>
                             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editEmpleado(empleado)"></button>
                             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteEmpleado(empleado)"></button>
@@ -192,7 +193,9 @@
                         <td>{{ cliente.email }}</td>
                         <td>{{ cliente.n_phone }}</td>
                         <td>{{ cliente.n_points }}</td>
-                        <td>{{ cliente.is_active}}</td>
+                        <td>
+                            <p-tag [value]="cliente.is_active?'Activo':'Inactivo'" [severity]="cliente.is_active?'success':'error'"></p-tag>
+                        </td>
                         <td>
                             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editCliente(cliente)"></button>
                             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteCliente(cliente)"></button>

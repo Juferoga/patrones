@@ -7,7 +7,7 @@ router = routers.DefaultRouter()
 router.register("", PurchaseViewSet)
 
 urlpatterns = [
-    # path('',include(router.urls)),
+    path('unique/',include(router.urls)),
     path('invoice/<int:purchase_id>/', GenerateInvoiceView.as_view(), name='generate_invoice'),
     path("sale-data/", MakeSaleView.as_view()),
 ]

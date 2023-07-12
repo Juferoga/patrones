@@ -95,7 +95,9 @@ import { PurchaseService } from '@services/purchase/purchase.service';
 
             <textarea style="min-width: 100%; margin-top: 30px;" [(ngModel)]="cal.observacion" rows="5" cols="30" pInputTextarea ></textarea>
 
-            <p-button style="display: flex; align-items;justify-content: flex-end;" (click)="sendRating()" icon="pi pi-external-link" label="Enviar"></p-button>
+            <div style="display: flex; align-items;justify-content: flex-end;">
+                <p-button (click)="sendRating()" icon="pi pi-external-link" label="Enviar"></p-button>
+            </div>
         </p-dialog>
     `
 })
@@ -103,6 +105,8 @@ export class ConfirmationDemo implements OnInit {
     ticketInformation: Booking;
     cal : any = {'calificacion':0,'observacion':''};
     visible = false;
+    score : number;
+    id_purchase : number;
 
     constructor(
         public ticketService: TicketService, 
@@ -119,8 +123,17 @@ export class ConfirmationDemo implements OnInit {
         this.ticketInformation = this.ticketService.ticketInformation;
         var adaptedBooking : Purchase = BookingAdapter.adapt(this.ticketInformation)
         this.purchaseService.makePurchase(adaptedBooking).subscribe(data => {
+            this.id_purchase = data['purchase_id'];
             this.purchaseService.getPurchasePDF(data['purchase_id'])
         })
+    }
+
+    setScore(){
+        this.purchaseService.setScore(this.cal['calificación'],this.id_purchase).subscribe(
+            data => {
+                this.messageService.add({key:'grl-toast', severity:'success', summary:'Acción realizada correctamente', detail:'Se realizo la calificación del servicio satisfactoriamente'});
+            }
+        )
     }
     
     prevPage() {
@@ -132,6 +145,7 @@ export class ConfirmationDemo implements OnInit {
     }
     
     sendRating() {
+        this.setScore();
         this.visible = false;
     }
 

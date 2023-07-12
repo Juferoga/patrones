@@ -101,6 +101,7 @@ export class SeatDemo implements OnInit {
 
   getSeats(){
     // Solicitar la lista de asientos desde el servicio.
+    this.ticketService.ticketInformation.seats = [];
     this.seatService.getSeats().subscribe(
       (data) => {
           // Filtrar asientos basados en la sala seleccionada

@@ -86,6 +86,7 @@ export class SnacksDemo implements OnInit {
   }
 
   getSnacks() {
+    this.ticketService.ticketInformation.snacks = [];
     this.snackService.getSnacks().subscribe(
       (data) => {
         this.snacks = data;

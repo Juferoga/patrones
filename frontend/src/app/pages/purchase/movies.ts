@@ -49,6 +49,20 @@ export class MoviesDemo implements OnInit {
 
     ngOnInit() {
         this.movies = this.ticketService.ticketInformation.movie;
+        this.getMovies();
+    }
+    
+    saveMovie( movie : Movie ){
+        this.ticketService.ticketInformation.movie = movie;
+        this.nextPage();
+    }
+
+    nextPage() {
+        this.router.navigate(['admin/mis-compras/shows']);
+    }
+
+    getMovies(){
+        this.ticketService.ticketInformation.movie = null;
         this.movieService.getMovies().subscribe(
             (movies: Movie[])=>{
                 this.movieList = movies;
@@ -69,14 +83,5 @@ export class MoviesDemo implements OnInit {
                 });
             }
         )
-    }
-    
-    saveMovie( movie : Movie ){
-        this.ticketService.ticketInformation.movie = movie;
-        this.nextPage();
-    }
-
-    nextPage() {
-        this.router.navigate(['admin/mis-compras/shows']);
     }
 }

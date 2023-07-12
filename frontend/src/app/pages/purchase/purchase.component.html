@@ -8,94 +8,65 @@
       <router-outlet></router-outlet>
     </div>
   </p-tabPanel>
-  <p-tabPanel header="Histórico"> 
+  <p-tabPanel header="Histórico compras"> 
       <ng-template pTemplate>
-        <!-- Tabla -->
-        <p-table [value]="pedidos" [tableStyle]="{ 'min-width': '50rem' }"  [rows]="5" [paginator]="true" [rowHover]="true" >
+        <p-table [value]="compras" dataKey="pk_id" [tableStyle]="{ 'min-width': '60rem' }">
           <ng-template pTemplate="header">
               <tr>
-                  <th>Factura</th>
-                  <th>Creación</th>
-                  <th>Multiplex</th>
-                  <th>Cliente</th>
-                  <th>Total</th>
-                  <th></th>
+                  <th style="width: 5rem"></th>
+                  <th pSortableColumn="pk_id">ID <p-sortIcon field="pk_id"></p-sortIcon></th>
+                  <th pSortableColumn="n_total_value">Valor total<p-sortIcon field="n_total_value"></p-sortIcon></th>
+                  <th pSortableColumn="n_score">Calificación <p-sortIcon field="n_score"></p-sortIcon></th>
+                  <th pSortableColumn="d_creation">Fecha creación <p-sortIcon field="d_creation"></p-sortIcon></th>
+                  <th pSortableColumn="fk_client">Cliente <p-sortIcon field="fk_client"></p-sortIcon></th>
               </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-pedido>
+          <ng-template pTemplate="body" let-compra let-expanded="expanded">
               <tr>
-                  <td>{{ pedido.pedido }}</td>
-                  <td>{{ pedido.fecha_creacion | date:'shortDate'}}</td>
-                  <td>{{ pedido.region }}</td>
-                  <td>{{ pedido.cliente }}</td>
-                  <td>{{ pedido.total  | currency:'COP':'$' }}</td>
                   <td>
-                      <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-warning" (click)="onPedidoSelect(pedido)"></button>
+                      <button type="button" pButton pRipple [pRowToggler]="compra" (click)="getProductos(compra)" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                  </td>
+                  <td>{{ compra.pk_id }}</td>
+                  <td>{{ compra.n_total_value | currency: 'COP' }}</td>
+                  <td><p-rating [ngModel]="compra.score" [readonly]="true" [cancel]="false"></p-rating></td>
+                  <td>{{ compra.d_creation | date }}</td>
+                  <td>{{ compra.fk_client }}</td>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="rowexpansion" let-compra>
+              <tr>
+                  <td colspan="7">
+                      <div class="p-3">
+                          <p-table [value]="productos" dataKey="id">
+                              <ng-template pTemplate="header">
+                                  <tr>
+                                      <th pSortableColumn="pk_id">Id <p-sortIcon field="price"></p-sortIcon></th>
+                                      <th pSortableColumn="t_name">Nombre <p-sortIcon field="t_name"></p-sortIcon></th>
+                                      <th pSortableColumn="t_description">Descripción <p-sortIcon field="t_description"></p-sortIcon></th>
+                                      <th pSortableColumn="n_price">Precio <p-sortIcon field="n_price"></p-sortIcon></th>
+                                      <th pSortableColumn="t_type">Tipo <p-sortIcon field="t_type"></p-sortIcon></th>
+                                  </tr>
+                              </ng-template>
+                              <ng-template pTemplate="body" let-order>
+                                  <tr>
+                                      <td>{{ order.pk_id}}</td>
+                                      <td>{{ order.t_name}}</td>
+                                      <td>{{ order.t_description }}</td>
+                                      <td>{{ order.n_price | currency: 'COP' }}</td>
+                                      <td>{{ order.t_type }}</td>
+                                  </tr>
+                              </ng-template>
+                              <ng-template pTemplate="emptymessage">
+                                  <tr>
+                                      <td colspan="6">No existen productos asociados.</td>
+                                  </tr>
+                              </ng-template>
+                          </p-table>
+                      </div>
                   </td>
               </tr>
           </ng-template>
         </p-table>
-        <!-- ./Tabla -->
       </ng-template>
   </p-tabPanel>
 </p-tabView>
-
-<p-dialog [(visible)]="isShowDetails" [style]="{ width: '550px' }" header="Detalles Compra" [modal]="true" styleClass="p-fluid">
-  <ng-template pTemplate="content">
-    <div class="col flex align-items-center justify-content-center" id="factura-compra">
-      <!-- Factura -->
-        <div class="fact-header">
-          <h5>Número de factura {{factura.N_FACTURA}}</h5>
-          <div class="fact-header-info">
-            <div class="left-info">
-              <p><strong>Cliente: </strong>{{factura.T_NCLIENTE}}</p>
-              <p><strong>Fecha Creación: </strong>{{factura.F_CREACION}}</p>
-              <p><strong>Fecha Pago: </strong>{{factura.F_PAGO}}</p>
-              <p><strong>Estado: </strong>{{factura.I_ESTADOF}}</p>
-            </div>
-            <div class="right-info">
-              <p><strong>Dirección envío: </strong>{{factura.T_DIRECCIONE}}</p>
-              <p><strong>Región: </strong>{{factura.T_REGION}}</p>
-              <p><strong>País: </strong>{{factura.T_PAIS}}</p>
-            </div>
-          </div>
-        </div>
-        <hr>
-        <div class="fact-body">
-          <p-table [value]="factura.A_ITEMSF" >
-            <ng-template pTemplate="header">
-                <tr>
-                  <td>Producto</td>
-                  <td>Cantidad</td>
-                  <td>Valor Unitario</td>
-                  <td>Total</td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-pedido>
-                <tr>
-                    <td>{{ pedido.N_PRODUCTO }}</td>
-                    <td>{{ pedido.Q_PRODUCTO}}</td>
-                    <td>${{ pedido.V_UNITARIO }}</td>
-                    <td>${{ pedido.V_TOTAL }}</td>
-                </tr>
-            </ng-template>
-          </p-table>
-        </div>
-        <div class="fact-footer">
-          <hr>
-          <p><strong>Subtotal: </strong>${{factura.V_SUBTOTAL}}</p>
-          <p><strong>Valor IVA: </strong>${{factura.V_IVA}}</p>
-          <p><strong>Valor Total: </strong>${{factura.V_TOTAL}}</p>
-          <hr>
-          <p>
-            <small>Fecha facturación: {{factura.F_GENERADA}}</small><br>
-            <small>UD BD2 - Sistema Facturación Bases de Datos 2</small>
-          </p>
-        </div>
-      <!-- ./Factura -->
-    </div>
-  </ng-template>
-  <ng-template pTemplate="footer">
-      <button pButton pRipple label="Cerrar" icon="pi pi-times" class="p-button-text" (click)="isShowDetails =false" ></button>
-  </ng-template>
-</p-dialog>

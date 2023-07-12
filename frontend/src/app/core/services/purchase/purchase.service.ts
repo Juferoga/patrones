@@ -17,6 +17,20 @@ export class PurchaseService {
     this.headers = this.headers.append("Content-Type", "application/json");
   }
 
+  getPurchases(){
+    return this.http.get<Purchase[]>(
+      environment.api + 'purchase/unique/',
+      {headers: this.headers}
+    )
+  }
+
+  getPurchase(id){
+    return this.http.get<Purchase>(
+      environment.api + `purchase/unique/${id}/`,
+      {headers: this.headers}
+    )
+  }
+
   makePurchase(data:Purchase){
     return this.http.post<Purchase>(
       environment.api + 'purchase/sale-data/',
@@ -32,5 +46,17 @@ export class PurchaseService {
         
         saveAs(blob, 'filename.pdf');
       });
+  }
+
+  setScore(score,id ){
+    let body ={
+      "score" : score
+    }
+
+    return this.http.patch<Purchase>(
+      environment.api + `purchase/unique/${id}/`,
+      body,
+      {headers: this.headers}
+    )
   }
 }

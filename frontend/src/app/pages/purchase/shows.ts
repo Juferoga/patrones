@@ -83,6 +83,7 @@ export class ShowsDemo implements OnInit {
     }
 
     getShow(){
+        this.ticketService.ticketInformation.show = null;
         this.showService.getShows().subscribe(
             (data) => {
                 // Filtrar shows basados en la película seleccionada
