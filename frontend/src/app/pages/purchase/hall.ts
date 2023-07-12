@@ -86,8 +86,9 @@ export class HallDemo implements OnInit {
             (data) => {
                 // Filtrar shows basados en la película seleccionada
                 let selectedShow = this.ticketService.ticketInformation.show;
+                console.log(selectedShow);
                 if (selectedShow) {
-                    this.shows = data.filter(show => show.fk_theater == this.ticketService.ticketInformation.show.fk_theater);
+                    this.shows = data.filter(hall => hall.pk_id  == this.ticketService.ticketInformation.show.fk_hall);
                 } else {
                     this.shows = data;
                 }

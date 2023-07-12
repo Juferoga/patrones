@@ -30,7 +30,7 @@ export class ShowService {
       "d_start_time": show.d_start_time,
       "d_end_time": show.d_end_time,
       "fk_movie": show.fk_movie,
-      "fk_theater": show.fk_theater
+      "fk_hall": show.fk_hall
   });
     return this.http.post<Show>(
       environment.api + 'function/',
@@ -45,7 +45,7 @@ export class ShowService {
       "d_start_time": show.d_start_time,
       "d_end_time": show.d_end_time,
       "fk_movie": show.fk_movie,
-      "fk_theater": show.fk_theater
+      "fk_hall": show.fk_hall
   });
     return this.http.patch<Show>(
       environment.api + 'function/'+show.pk_id +'/',

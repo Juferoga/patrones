@@ -203,19 +203,19 @@ def create_tickets(n=5):
 
 
 def populate_db():
-    # create_users_c(n=10, role=RoleChoices.CLIENT)
-    # create_cinemas(n=5)
+    create_users_c(n=1, role=RoleChoices.CLIENT)
+    create_cinemas(n=1)
 
-    # create_users_e(n=10, role=RoleChoices.EMPLOYEE)
-    # create_theaters(n=5)
-    # create_movies(n=10)
-    # create_products(n=10)
-    # create_purchases(n=10)
-    create_halls(n=1000)
-    # create_tickets(n=10)
-    # create_seats(n=100)
-    # create_snacks(n=10)
-    # create_functions(n=50)
+    create_users_e(n=1, role=RoleChoices.EMPLOYEE)
+    create_theaters(n=1)
+    create_movies(n=1)
+    create_products(n=1)
+    create_purchases(n=1)
+    create_halls(n=1)
+    create_tickets(n=1)
+    create_seats(n=1)
+    create_snacks(n=1)
+    create_functions(n=1)
 
 
 if __name__ == "__main__":

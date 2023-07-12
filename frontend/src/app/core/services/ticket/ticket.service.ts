@@ -12,7 +12,7 @@ import { PurchaseService } from '../purchase/purchase.service';
   providedIn: 'root'
 })
 
-class Booking {
+export class Booking {
   seats: Seat[];
   show: Show;
   hall:Hall;

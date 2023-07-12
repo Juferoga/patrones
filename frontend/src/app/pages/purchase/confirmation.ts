@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Messages } from 'primeng/messages';
-import { TicketService } from '@services/ticket/ticket.service';
-import { Snack } from '@models/products/products.model';
-
+import { Booking, TicketService } from '@services/ticket/ticket.service';
+import { BookingAdapter, Purchase } from '@models/purchase/purchase.model';
+import { PurchaseService } from '@services/purchase/purchase.service';
 
 @Component({
     template: `
@@ -19,7 +19,7 @@ import { Snack } from '@models/products/products.model';
                     </div>
                     <div class="field col-12">
                         <label for="class">Función : </label>
-                        <b>{{ ticketInformation.show.d_date | date }} | {{ ticketInformation.show.d_start_date | date: "hh:mm a" }} - {{ ticketInformation.show.d_end_date | date: "hh:mm a" }}</b>
+                        <b>{{ ticketInformation.show.d_date | date }}</b>
                     </div>
                     <div class="field col-12">
                         <label for="class">Asientos : </label>
@@ -80,7 +80,7 @@ import { Snack } from '@models/products/products.model';
         </div>
         
         <p-dialog header="Califica tu experiencia" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
-            <p class="m-0">
+            <p style="margin-bottom: 30px;">
                 Tú experiencia es muy importante para nosotros, selecciona que tan contento estas con la atención!!!
             </p>
 
@@ -92,21 +92,23 @@ import { Snack } from '@models/products/products.model';
                     <img src="https://primefaces.org/cdn/primeng/images/demo/rating/custom-icon.png" width="25px" height="25px" />
                 </ng-template>
             </p-rating>
-            <textarea [(ngModel)]="cal.observacion" rows="5" cols="30" pInputTextarea ></textarea>
+
+            <textarea style="min-width: 100%; margin-top: 30px;" [(ngModel)]="cal.observacion" rows="5" cols="30" pInputTextarea ></textarea>
 
             <p-button style="display: flex; align-items;justify-content: flex-end;" (click)="sendRating()" icon="pi pi-external-link" label="Enviar"></p-button>
         </p-dialog>
     `
 })
 export class ConfirmationDemo implements OnInit {
-    ticketInformation: any;
+    ticketInformation: Booking;
     cal : any = {'calificacion':0,'observacion':''};
     visible = false;
 
     constructor(
         public ticketService: TicketService, 
         private router: Router,
-        private messageService:MessageService) {}
+        private messageService:MessageService,
+        private purchaseService:PurchaseService) {}
 
     ngOnInit() {
         this.ticketInformation = this.ticketService.ticketInformation;
@@ -114,7 +116,11 @@ export class ConfirmationDemo implements OnInit {
 
     complete() {
         this.visible = this.ticketService.complete();
-        
+        this.ticketInformation = this.ticketService.ticketInformation;
+        var adaptedBooking : Purchase = BookingAdapter.adapt(this.ticketInformation)
+        this.purchaseService.makePurchase(adaptedBooking).subscribe(data => {
+            this.purchaseService.getPurchasePDF(data['purchase_id'])
+        })
     }
     
     prevPage() {
@@ -126,6 +132,7 @@ export class ConfirmationDemo implements OnInit {
     }
     
     sendRating() {
+        this.visible = false;
     }
 
 }
